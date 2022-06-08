@@ -1,0 +1,332 @@
+AWS services i have worked on :-
+1.RDS
+2.VOLUMES
+3.S3Bucket
+4.VPC
+5.AMI & scaling 
+6.Load balancing
+
+other then obove
+1.route53
+2.stepfunctions
+3.lamda
+4.ELP
+5.sqs,sms
+6.cloudwatch
+
+
+1.RDS:- Relational database service
+      after creating RDS we will get password and end point URL we have to save that
+	  We have to share the fallowing details with devoloper to configure in pom.xml file 
+	      a.endpoint URL
+          b.username :- admin
+          c.password :- it will be avilable only after creating RDS we have to save 
+ if we want to modify any configuration need to go modify option 		 
+
+for steps reffer word file 
+ 
+
+EC2 :- elastic compute cloud
+Search RDS --- DB instance
+MY SQL portnimber :-3306
+
+NOTE :-
+ ELASTICIP'S are free when it as been attched to running instance, but if running instance is stoped or Elastic IP has keept idel then it is charged.
+
+        ****VOLUMES*****
+   process:
+		if we want some perticular data in multipale servers then we can use volumes 
+		first create volume1, if you want same data in other server2 then take snapeshot1 of that volume1 then create new volime2 from that snapshot1,
+		then attche volume2 to server2 	
+   how to increase disk space 
+   there are 2 ways to incress disk space 
+   1.By increasing root volume.
+   2.By attching external disk.
+   
+   1.By increasing root volume.
+       1.copy ip address of instance 
+       2.go to volumes past ip addres in search tab, 
+       3.there you will find a volume of instance, modify that. 
+	   
+2.By attching external disk.  
+    1.go to volumes tab 
+    2.click on Create VOLUMES and mention disk space, avilabelity zone, click in tags, give Name and click on create 
+    3.click on Action --> Attche --> in that tab mention instance ip addres 
+	   
+	After attching external disk, in server we need to exigute bellow 5 steps
+	lsblk :- it will show total disk memory (GB)
+    sudo file -s /dev/xvdf   :- check the data in dev/xvdf/ it shoud be ext4 format.
+    if the data is not in ext4 format only then we need to exigute bellow command otherwise it will erase all data in that disk	
+    sudo mkfs -t ext4 /dev/xvdf  :- convert xvdf file to ext4, because ext4 file can be attched to server so need to convert.
+    sudo mkdir newvolume      :-  creat new directory 
+    sudo mount /dev/xvdf /home/ubuntu/newvolume   :- attch directory to xvdf file.so that data placed in newvolume directory will be stored in external disk 
+	 
+	 How to create a snapshort of volume
+	  1.select perticular volume
+	  2.click on Actions-- Create snapshot 
+	  
+	 How to create Volumes from snapshot 
+	  1.Select Snapshot
+	  2.Click on Action---> create volume 
+   
+Note :- if server rebooted or restarted, volumes will detach from server so we have mount volume again by sudo mount /dev/xvdf/  /newvolume/   
+        or 
+       go to etc take backup of fstab "sudo cp /etc/fstab /etc/fstab.bak" and
+	   vi fstab :- past fallowiing command " dev/xvdf   /newvolume ext4    defaults,nofail        0       0 "  in fstab (permanent server )
+	   
+	   If you want to attach existing volume to new server
+Follow the below steps:
+Attaching volumes
+Taking volume backup using snapshot
+From snapshot again create a volume
+Now attach volume to your Required server
+(Note: Newly created Volume and server should be on same availabilty zone)
+ 
+AMI :- Tacking backup of total server which include code,server configurations, packages, mysql backups etc 
+AMI (amazone machine image) --- taking backup of total server
+snapshot :- tacking backup of external disk (Volumes)
+
+
+ ****S3 Bucket-(SIMPLE STORAGE SERVICE)****
+ S3Bucket is used to store data like mysql backup data, keypares etc
+ 
+ How will Utilized AWS CLI to automate backups of ephemeral data-stores to S3 buckets and EBS
+   * launch EC2 and install aws cli by command $apt install awscli
+   * create backup directory in root directory 
+   * create s3 bucket in aws, to creat s3 bucket need to create rool in IAM & attch that rool to EC2
+   * sync backup directory and s3 bucket  $aws s3 sync /root/directory_name s3://s3bucket_name
+   * crteate crontab -e and place sync command in that to automate backup 
+      * * * * * aws s3 sync /root/directory_name s3://s3bucket_name
+   * restart crontab service by $systemctl restart crond.service 
+      now the files which are in backup directory will be stored in s3 bucket
+	  
+	  
+	  https://www.youtube.com/watch?v=wJJnTGHmPYQ
+	  https://www.youtube.com/watch?v=hdIlcu75_Lw
+	  https://www.youtube.com/watch?v=6Ccoa9jNI7c  :- tacking mysql back up to s3bucket 
+   
+      https://www.youtube.com/watch?v=m8OZRZGfrFg  :- AWS - VPC Endpoint for S3, Private access to S3 from Private Instance
+ 
+ IAM :- identity access managment 
+   In AWS we will create user and we can give required permissions to that user (IAM user)
+   there will be 2types of access 1:- programatic access (connecting from linux server to AWS server)
+                                  2:- AWS Server consule access ex:- 1.RDS read wright access
+									                                 2.VPC read wright access
+										                             3.EC2 read wright access 
+																	 etc
+								      
+
+search s3 --- creat bucket ( no need to make any changes just leave as it is.) :- creating s3 bucket by s3 bucket consule 
+              in s3 bucket consule you can create folder and you can directly upload files 
+connecting s3 and server
+sudo apt-get update
+sudo apt-get install awscli
+aws --version 
+aws configure
+it will ask aws access key and scert key of user :- copy past IAM user name and password (to connect s3 bucket it is complsory to have s3 IAM user)
+now it will ask region name and output format :- no need to mention any thing 
+aws s3 ls :- it will list the all S3 Buckets in that AWS account 
+--> after confugar we can creat bucket by linux server by :- aws s3 mb s3://bucketname/
+ 
+Note:- root user con't access s3 bucket he have to creat iam user (get access key and security key) and have to login in AWS consule through IAM user
+
+what is the avilability and durability 
+99.99 avilability
+99.999999 durabuilty
+
+maximum file size upadted to s3 bucket 5tb
+cold storage option is avilable it will be usefull when you want to store data for long time 
+
+useses of s3 bucket
+1.object storage (files, movies, docs , backups, …)
+List out the buckets
+aws s3 ls
+2.Creating bucket (make bucket)
+aws s3 mb s3://rishibabu123/
+3.Removing Buckets
+aws s3 rb s3://bucket-name
+aws s3 rb s3://rishibabu123
+4.Uploading file to s3
+aws s3 cp text s3://rishibabu123/
+5.To know complete information in bucket about sizes and no.of files
+aws s3 ls s3://rushibucket01/ --recursive --human-readable --summarize
+6. ls command will recursively list objects in a bucket and files inside the subfolders
+aws s3 ls s3://rishibabu123/ --recursive
+7.Download Files from s3 bucket to local
+aws s3 cp s3://rishibabu123/text .
+( . is mandatory and give full permission to folder where you are downloading)
+8.Copying a file from S3 to S3
+aws s3 cp s3://rishibabu123/txt.file s3://newbucket-name
+9.To remove buckets forcebally
+aws s3 rb s3://bucket-name --force
+aws s3 rb s3://rushibucket01 --force
+
+
+
+quation
+how you store data in s3 bucket and how to establesh connection between server and S3Bucket ?
+Update server             :-sudo apt-get update
+Install AWS CLI Package   :-sudo apt-get install awscli
+                            aws --version
+establesh configuration   :-aws configuration
+                            it will ask aws access key and scert key of user :- copy past IAM user name and password
+                            now it will ask region name and output format :- no need to mention any thing
+aws s3 ls                 :- it will list the all S3 Buckets in that AWS account
+
+how many buckets can created in S3 
+100 Buckets can creat by default
+1000 buckets can 
+
+
+
+*****virtul privit cloud (vps)********
+
+step1 :- create vpc 110.10.0.0/16
+step2 :- enable dns(domin name system)   action--- edit dns hostname --- check enable --- save changes
+step3 :- creat subnets for your avilabelity zones---- ex:- paytmsubnet1 100.10.1.0/24, paytmsubnet2 100.10.2.0/24, paytmsubnet3 100.10.3.0/24.
+step4 :- for public ip do the fellowing settings
+          select subnet:- action-- edit subnet settings---select enable auto assin public ips --- save
+step5 :- inertnet gateway  --- creat inetrnetgeatway---attch vpc--- create
+
+note :- internet gatway can be attched only for one VPC
+
+step6 :- Routtable --- give name and creat rout table 
+         
+step 7:-  go to VPC --- routetable --- select perticular routetable --- 
+		               1. below got to route--- edit routes--- add route--- give 0.0.0.0/0 attach internet gateway ()
+					   2. go to subnet accocitaions --- select subnets--- save
+					  note :- if internet gateway as been not attched then that servers cannot be accessed directly, they can be connected only private servers 
+        go to vpc --- add 0.0.0.0/0 inernet gateway in routcable   and then go to subnets accocitaions, select subnet which want to comunicate
+
+step 8:- launch instance by selecting vpc and subnet in configuration instance tab 
+step 9:- create elastic ip 1.allocate elastic 
+                           2.action--> accociate---> select server (instance) , select privit ip addres.
+						   
+
+how to set a nat gateway to the private  server 						   
+NAT GATEWAY :- It is used to provide internet to the private servers 
+
+1.create natgateway 
+2.select subnet :- we need to select only public subnet (so from that selected public server we can connect to that private server)
+3.allocate elastic ip then create 
+4.go to route table ---> edit routs ---> add routs --->0.0.0.0/0 and attach NATGATEWAY then add 
+ now we can access 
+ 
+
+
+quation:- maximum only 5vpc can be created if we need extra need to rice tickets
+CIDR :- classless inter domin routing 
+ip4 is 32bit
+ip6 is 128bit
+
+Q) how to indentify a subnet wether it is private r public 
+
+note:- evean defult VPC also need to have subnets, inetnet gateway and toutable.
+***** Auto scaling ******
+
+AMI (Amazon machine image) is the prerequisite to do auto scaling 
+if we take back up of entair server then it is called AMI
+
+How to copy server (EC2 instance ) from one region to another region  
+1- select server ---Action ---- image and template--- create image 
+2- Give name and discription ---create image 
+3- GO to Ami --- select server --- Action --- copy Amis --- select region, give name and description  
+
+Auto scaling 
+1- select server ---Action ---- image and template--- create image 
+2- Give name and discription ---create image 
+3- select launch configuration
+       create launch configaration 
+    1. give name 
+	2. select AMI 
+	3. select instance type (in such a way that while scaling servers shoud not exit more then 2 or 3 servers ex:- t2micro, t3micro)
+	4. select existing sceruity group (select sceruity group same as instance which you want to scale)
+	5. select existing key pair 
+	create
+	Go to action---> create auto scaling group 
+	1.give name ---> next
+	2.configur settings--> select VPC and subnets----> next
+	3.configur advanced settings ---> select no load balancers 
+	4.configur group size ---> mention number of servers required  1.desired capacity=1, 2.minimum capacity=1 and 3.maximum capacity=2
+	   desired capacity means number of servers need to be launched once if it reaches 85% of main server and it shoud be alwase one
+    5.select TARGET TRACKING SCALING POLICY & avarage CPU utilization, 85%, 300sec
+	6.notification services, to modify this intially we need to configer sms(simple notification service)
+	7.tags
+	
+	while deleting 
+	1. need to delete auto scaling group 
+	2.delete launch configuration 
+	3.delete Ami
+	4.DELETE Snapshot
+	
+	919789945889
+	
+
+NOTE :- in auto scaling we need to plan to take large CPU for second server so that it is seffecent to serve reised requist 
+        maximum 10 servers can be launched in auto scaling 
+		
+        --->in auto scaling if server recahes 85% of its CPU usage then it will launch new server 
+		
+		
+		
+		****Load balancing***
+		 types of load balancer 
+		 1.application loadbalncer 
+		 2.network load balancer 
+		 3.clasic load balancer,:-it will take care of both application and network 
+		 4.gateway load balancer
+		 
+		 
+	steps
+	1. launch 3 instamces 
+	2.go to load balancer--create load balancer--- clasic load balancer
+	  a:- Define load balancer 
+	      -give name 
+		  -select vpc if required 
+		  -give port number if required
+	  b:- asign sceruity group :- select security group
+	  c:- configur security group
+	  d:- configur health check 
+	        ping portocal:- select HTTP (hyper text transfer protocall)
+			ping port :- 80
+			ping path :- .html (war/www.index.html)
+	   e:-select instance
+       f:- give tag	   
+	
+			
+ECR and ECS
+Amazon Elastic Container Registry (ECR)
+it is a fully-managed Docker container registry that makes easy to store, manage, deploy Docker container images. 
+Amazon ECR is integrated with Amazon Elastic Container Service (ECS), simplifying your development to production workflow	      
+ 
+*****shell script******
+free -h :- to check buffer and cache 
+
+*it's very importent to give exicutable permissions to screpted file
+ sudo chmode +x scrept.sh 
+ 
+ du -sh mysql.sh 
+****nagios*****
+
+in wich u have did configaration changes to achive nagios 
+how u establised connection to monitor server 2
+
+what is Iaas & PaaS & SaaS
+Infrastrucher as a service:- Vendor will provide only the infrastrucher like compute, storage, security, network. so we can costamize what ever we want.
+Platform as a services:- costamization will be limited 
+Software as a service :- vendor will mangage all the things and they will provide
+
+
+AWS Topics 
+ELK:-  Elasticsearch, Logstash, and Kibana.
+EFK:- Elasticsearch, Fluentd, and Kibana
+Lambda
+ACM
+
+  ***server refused our key ssh***
+   here we are unable to connect to server through ssh so we will conect to server by aws consoule 
+   AWS consoule ---> AWS system mangager---> session manager
+   in session manager ---> start session there intially you cont find any ec2 instance 
+   in order to view ec2 instance in session manager consoul we need to modify iam role attched to ec2 instance, this iam role have a session
+   manager permissons 
+   https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-create-iam-instance-profile.htmlj

@@ -1,10 +1,45 @@
-01.sudo wget link-addres
+01.sudo wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.75/bin/apache-tomcat-8.5.75.tar.gz
 02.sudo tar -xvf tomcat.az 
-03.sudo vi /opt/Tomcat-08/webapps/manager/META-INF/context.xml   :- replace (127.0.0.0.0) by (.*) 
-04.add script in tomcat-users.xml file  (path:- /opt/Tomcat-08/conf)
+   rename file if needed by mv command 
+   give port number
+03.sudo vi /opt/Tomcat-08/webapps/manager/META-INF/context.xml   :- replace (127.0.0.0.0) by (.*) :- to resolve 403
+04.add script in tomcat-users.xml file  (path:- /opt/Tomcat-08/conf) :- to resolve 401 error 
   <tomcat-users>
    <role rolename="manager-gui"/>
    <user username="admin" password="Admin" roles="manager-gui, manager-script, manager-admin, manager-status"/>
    </tomcat-users>
+   
+   esc+e+d to delete total line 
+   
 05.change port number of tomact in /opt/conf/server.xml and asign the same port number in secirity group in server
-06. sh startup.sh     :-Start tomcat by /opt/tomcat/bin/startup.sh 
+06.sh shoutdown.sh , sh startup.sh     :-Start tomcat by /opt/tomcat/bin/startup.sh 
+
+*if u want to start and stop go to bin path
+*if u want do changes related to server go to server.xml file 
+
+war files ithe tomcat lo up chasthamu
+jar files ithe nohup comments use chase up chasthamu 
+
+Tomact is used to UP the war file.
+
+******* war file which you want to run need to be copped to tomcat/webapps directory (very importent to remember)
+
+procger :-
+  to install tomcat, java need to be installed intially 
+  *to statrt and stop go to bin path 
+  *if need to do changes related to server go to server.xml
+  *change port number in server.xml file
+  *give port number in security group
+  *check in web server id and port number 
+  *make changes in context.xml file
+  *   
+  
+what is 403 error in tomcat 
+403 is acces denied error accored when we are trying to accces the server from nonlocaly
+
+what is 401 error 
+it is unothorised error when user and password as not used
+  
+if you want to find logs
+cd/opt/tomcat/logs/
+vi catalina.out

@@ -1,0 +1,48 @@
+source
+       :- https://www.youtube.com/watch?v=yZFvJEygn_g
+	   :- https://www.youtube.com/watch?v=b-1_ItRpv-k&t=1131s (detail explanation in telugu)
+	   
+to install nexus :- 
+https://devopscube.com/how-to-install-latest-sonatype-nexus-3-on-linux/
+	   
+how to configure maven with nexus 
+****fallow this blog for proceger
+ :- https://blog.sonatype.com/using-nexus-3-as-your-repository-part-1-maven-artifacts  
+
+step:- 1
+  mention local repository path in .m2/srtting.xml file if you want to change  
+  and also mention bellow script by changing id if required 
+  
+  <server>
+      <id>nexus-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    <server>
+      <id>nexus-releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+  </servers>
+ 
+step:- 2
+  inside project there will be pom.xml file in that mention bellow script by changing url and id shoud 
+  be same as mention in setting.xml file 
+  
+  <project>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <url>http://your-host:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>nexus-releases</id>
+      <url>http://your-host:8081/repository/maven-releases/</url>
+    </repository>
+  </distributionManagement>
+</project>
+    
+	   
+	   what is artifact
+	   the file that contain both compiled code and resource that are used to compile them are known as artifacts. they are readily deployable 
+	   files.

@@ -7,18 +7,42 @@ STASH
 Stash is a temprovary memory which is used to store the data which is present in the stageing area
 
 conflict error
-when we try to merge a file which is edited by two braches then conflict error accour 
+when we try to merge a file which is modified by two dvlopers in two branches then conflict error accour 
 
-SVN and GITHUB
- *repositors are called centralised repository             *distributrd centrakised repositors
- *traking is dificult                                      *logs can be tracked esayly 
- *required continues internet acces                        *not required 
+               SVN                               and                GITHUB
+ * repositors are called centralised repository             * distributrd centralised repositors
+ * traking is dificult                                      * logs can be tracked esayly 
+ * required continues internet acces                        * not required 
+ * more cast                                                * less cast
 
 
 github is a centralised reposatory used to store data
 git is shoftware used to push data 
 
 Mavan :- it is a build tool and project managment tool
+         Build tool converts human readale formet to sydtem readble format.
+		  
+		 mavan as devloped by java based langugae, to install maven need to install java and set enveronment variables 
+		 
+		 how to Download maven folder strucher 
+		 1. go to folder where you want to download (in windos)
+		 2. type cmd in path bar 
+		 3. maven archetype:generate   (mvn archetyepe:generate > allfolderstrucher)
+		 
+		 how to get jar file by maven 
+		    Need to pass maven goals they are 
+		    validate - validate the project is correct and all necessary information is available
+            compile - compile the source code of the project
+            test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+            package - take the compiled code and package it in its distributable format, such as a JAR.
+            verify - run any checks on results of integration tests to ensure quality criteria are met
+            install - install the package into the local repository, for use as a dependency in other projects locally
+            deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+			
+		1.mvn validate
+		2.mvn install   :- it will install tareget directory and jar in it 
+		   
+		 
 http://mithuntechnologies.com/devops/DevOpsToolsMithunTechnologies.html  :- MITHUN requred tools 
 
 Q)what is permission for file and direcotry
@@ -34,7 +58,8 @@ Q4)how many types of repositorys avilable mavan
     1.cental --->updated data related to maven we will get from cental
     2.remote
     3.local --->data in the central repocitry will be stored in the local repocetory for 1st time 
-Q5)Tomcat version 8, it is web app depolyment server, it is used to up WAR file
+Q5)Tomcat version 8, it is web app depolyment server, it is used to up WAR file. it provides a pure java HTTP web server environment in which java 
+                     code can run.
 Q6)poc ---> proof of concept
 q7) list out mavne goles
 
@@ -61,3 +86,11 @@ to change server related go to change server.xml
    
    
  *server disk can be incresed but not dicresed 
+ 
+Q) can we increse & decrese the instance type :-yes
+Q) can we increse & decrese the disc volume   :-incresing is posobale but not posibale to decresing
+ 
+ if server is slow what to check 
+ -cehck CPU 
+ -check NETWORK 
+ -check disc volume

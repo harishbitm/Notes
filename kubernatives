@@ -1,4 +1,7 @@
-       https://devopscube.com/setup-kubernetes-cluster-kubeadm/
+   Kubernatives is open source container orechestation tool devloped by google, 
+  it will helps u to manage containerized application in defferent devlopment enveronments like physical,vertial & cloud
+
+   https://devopscube.com/setup-kubernetes-cluster-kubeadm/ :- kubeadm method
 
 1. sudo apt-get update && sudo apt-get install awscli -y
 2. sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl

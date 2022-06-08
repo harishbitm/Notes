@@ -1,0 +1,190 @@
+programing knowladge :- shall script for bigneers
+
+class-1
+1. cat etc/shells :- it will list type of shall scripts your OS supports
+2. which bash :- it will show path of bash file located 
+3. write script by creating file ending with .sh and it shoud have exigutable permissions 
+4. sudo chmode +x file name :- command to give exigutable permissions
+5. ./filename:- command to exiguit script
+
+class-2
+there are two types of variables
+1.system variables
+   variables are created and maintained by linux oprating sydyem, these are the pre-define variable defined by operating system, used in upercase
+EX:echo $BASH
+   echo $BASH_VERSION
+   echo $PWD
+   echo $HOME
+2.user define variables
+   variables created and maintained by users
+   EX:- name=harish
+        echo $name
+		if you run script by ./file name result will be harish
+		 
+	     name=rushi
+		 echo master name is $name :- result will be "master name is rushi"
+		 
+class-3
+eq compare if two numbers are equal
+-ge compare if one number is greater than or equal to a number
+-le  compare if one number is less than or equal to a number
+-ne  compare if two numbers are not equal
+-gt  compare if one number is greater than another number
+-lt  compare if one number is less than another number 
+
+Examples: 
+[ n1 -eq n2 ]  (true if n1 same as n2, else false)
+[ n1 -ge n2 ]  (true if n1greater then or equal to n2, else false)
+[ n1 -le n2 ]  (true if n1 less then or equal to n2, else false)
+[ n1 -ne n2 ]  (true if n1 is not same as n2, else false)
+[ n1 -gt n2 ]  (true if n1 greater then n2, else false)
+[ n1 -lt n2 ]  (true if n1 less then n2, else false)
+
+		 
+		 
+		 
+
+Clearing cache and Buffer scripts:
+
+free
+
+free -h
+
+#bin/bash
+
+write script by creating file ending with .sh and it shoud have exigutable permissions 
+sudo chmode +x file name :- command to give exigutable permissions
+
+# script for clearing cache and swap memory when it reaches 90%
+
+ 
+
+a=$(vmstat -s | awk  ' $0 ~ /total memory/ {total=$1 } $0 ~/free memory/ {free=$1} $0 ~/buffer memory/ {buffer=$1} $0 ~/cache/ {cache=$1} END{print (total-free-buffer-cache)/total*100}')
+echo ${a%.*}
+echo "Present cache and swap memory is  $a"
+if [ ${a%.*} -ge 85 ];then
+echo "clearing cache"
+echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'
+else
+echo "No Need to clear cache right now"
+fi
+
+
+how to place script
+
+
+First copy the script path
+/home/accenture/sandeeep/clearcache.sh
+sudo su
+crontab -e
+* * * * * 
+
+
+**********************************************************************************************************
+
+
+JAVA SERVICES UP & DOWN
+
+
+1]  service 
+Port No: 8090  
+sudo ss -lptn 'sport = :8090' | tail -n1
+nohup java -jar target/service.jar & 
+
+
+check servivces.sh
+sudo ss -lptn 'sport = :8090' | tail -n1
+sudo ss -lptn 'sport = :8091' | tail -n1
+sudo ss -lptn 'sport = :8092' | tail -n1
+sudo ss -lptn 'sport = :8093' | tail -n1
+sudo ss -lptn 'sport = :8094' | tail -n1
+
+
+sudo kill -9 pid
+
+start java servivces
+#2servicename-9090
+cd /home/sandeep/services/Reports
+nohup java -jar target/service.jar &
+
+***************************************************************
+
+Scripts to check always make java services up:
+
+
+
+#!/bin/bash
+
+timestamp=`date +"%Y-%m-%d %H:%M:%S"`
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" -I http://localhost:9092/getAlltemplateNames)
+
+if [[ ${STATUS} -eq 200 ]]
+then
+echo “ $timestamp Everything is Fine” >> /home/service/reporting_log.txt
+else
+cd /home/admin/services/Reports
+nohup java -jar target/service.jar &
+echo " $timestamp Restarted successfully" >> /home/service/reporting_log.txt
+echo " Services" |mutt -s "Buzz Reporting Restarted $timestamp " -- sandeep@acure.com 
+fi
+
+
+*********************************************************************************************************
+
+Mysql backups:
+
+
+YEAR=`date +%Y`
+MONTH=`date +%m`
+DAY=`date +%d`
+HOUR=`date +%H`
+sudo mkdir -p $YEAR/$MONTH/$DAY/$HOUR
+
+mysqldump -uroot -proot schemaname > /home/schema.sql
+mysqldump -uroot -proot schemaname > /home/schema.sql
+mysqldump -uroot -proot schemaname > /home/schema.sql
+mysqldump -uroot -proot schemaname > /home/schema.sql 
+mysqldump -uroot -proot schemaname > /home/schema.sql
+
+
+
+
+YEAR=`date +%Y`
+MONTH=`date +%m`
+DAY=`da	te +%d`
+HOUR=`date+%H`
+sudo mkdir -p $YEAR/$MONTH/$DAY/$HOUR
+
+mysqldump -uroot -proot control > $YEAR/$MONTH/$DAY/$HOUR/control.sql --set-gtid-purged=OFF
+mysqldump -uroot -proot fundstransfer > $YEAR/$MONTH/$DAY/$HOUR/fundstransfer.sql --set-gtid-purged=OFF
+
+
+****************************
+
+sudo ss -lptn 'sport = :7071' | tail -n1
+
+sudo ss -lptn 'sport = :7072' | tail -n1
+sudo ss -lptn 'sport = :7073' | tail -n1
+UserManagement-0.0.1-SNAPSHOT.jar
+
+go to service where you can see pom.xml src/
+nohup java -jar target/output.jar &
+
+**********
+(& symbol will helps us to run the process in the backend even after closing sesion unless and untill we stop it)
+ps -ef                  :- it will show the process id which are running in the backend 
+ps -ef | grep myysql    :- it will filter the required process
+sudo kill -9 processid  :- it will stop services 
+
+what is the defference between sudo kill -9 and sudo kill -15 
+sudo kill -9 :-will kill the process
+sudo kill -9 :-force kill
+
+
+commands 
+free -h 
+du -sh mysql.sql :- it will show volume of the file 
+ps -ef :- process id
+
+
+programing knowladge :- shall script for bigneers

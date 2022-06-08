@@ -1,8 +1,28 @@
+
+DOCKER:- Docker is an open source containerization platform for building, deploying, and managing containerized applications.
+
+ON UBUNTU
 apt-get update
 get.docker.com
    This script is meant for quick & easy install via:
-   #   $ curl -fsSL https://get.docker.com -o get-docker.sh
-   #   $ sh get-docker.sh
+   #   curl -fsSL https://get.docker.com -o get-docker.sh
+   #    sh get-docker.sh
+   
+on amazon linux 2
+   
+        steps 
+		    1. sudo yum update
+			2. sudo yum install docker
+			3. sudo systemctl start docker.service  :- Start the Docker service:
+			   'or' sudo systemctl start docker && sudo systemctl enable docker && sudo systemctl status docker
+			    extra confiduration
+            4. sudo systemctl enable docker.service :- Enable docker service at AMI boot time
+            5. sudo yum search docker 
+			6. sudo yum info docker 
+			
+			 fallowd :- https://www.cyberciti.biz/faq/how-to-install-docker-on-amazon-linux-2/
+			
+	
   after installing need to give user permission
   sudo usermod -aG docker $USER  
   sudo chmod 666 /var/run/docker.sock
@@ -21,7 +41,7 @@ docker attch continerID :- to get into the continer
 ctr+pq :- it will come out from continer without stoping
 docker stop continerID :- it will stop continer
 docker rename oldname newname
-docker run -it --name icici-prod2 imageID (@30min) :- it will creat a continer with requred name 
+docker run -it --name icici-prod2 imageID (@30min):- it will creat a continer with requred name 
 docker restart continerid
 docker -rm containerid  :- remove
 docker rm containerid -f
@@ -35,41 +55,75 @@ can we remove a running container :- yes we can but not recmended
 
 note :-
        N number of continers can be created by using one images 
-   ****** Docker-3
-Docker build -t imagename .:- (-t=tag, "."= if your in same path u have to give "."  if not need menstion path) = Docker file to Docker image 
-Docker run -it imageID = Docker image to Docker container
-How to creat docker file
+	   
+   ****** Docker-3 ******
+   Docker file 
+   How to creat docker file 
+ creat file with name as Dockerfile write script in that file 
+ 
  FROM ubuntu
  MAINTAINER harish <harish@gmail.com>
  RUN apt-get update
  ARG DEBIAN_FRONTEND=noninteractve
  RUN apt-get install git maven -y
  RUN apt-get install wget -y 
- RUN wget linkaddres 
+ RUN wget linkaddres
  RUN cd /opt/ && wget linkaddres (to run two commands use && symbole)
  EXPOSE 80 :- to provide port number to continer
  COPY :- to copy data in server 
  ADD  :- to get data from external or can use wget
  WORKDIR /temp/   :-it is used if u want to save container in any pertiqular directory 
  
+Docker build -t imagename . :- (-t=tag, "." = if your in same path u have to give "."  if not need menstion path) = Docker file to Docker image 
+Docker run -it imageID = Docker image to Docker container
+
+ 
  docker tag imagename imagenamebackup:-  it will take backup (copy) total image 
  
  {sudo usermod -a -g docker $USER
  sudo chmod 666  /var/run/docker.sock} by this two commands we can use user without sudo 
  
+ Q) How to copy file to docker container
+    docker cp /source /destination :- can copy local to container and viseversa 
+	
+Q) how to expose contaier publicly 
+     docker run -it -p hostport:containerport --name jenkins imageid
+     docker run -it -p 8080:8080 --name jenkins imageid
+	
+	defference between expose and publish
+	  
+	  expose :- while exposed ports can only be accessed internally,
+	  publish :-  published ports can be accessible by external containers and services.
+	  Whereas publishing a port using either -P or -p exposes it, exposing a port using EXPOSE or –expose does not publish it. 
+	  
+   there are two ways to expose port 
+   1. By writing a EXPOSE cmd in Docker file (EXPOSE 8080)
+      By default, the EXPOSE instruction does not expose the container’s ports to be accessible from the host. 
+	  In other words, it only makes the stated ports available for inter-container interaction.    
+   2. By writing a expose flag at run time string (docker run -it --expose=8080 imageid) 
+       by useing this flag a range of ports can be exposed 
+	   
+	there are two ways to publish port
+   1. -P (upper case) Using the -P flag at runtime lets you publish all exposed ports to random ports on the host interfaces.
+       It’s short for –publish-all.
+   2. -p (lower case) Using the -p flag at runtime lets you publish a container’s specific port(s) to the Docker host. 
+      It’s short for –publish.
+	  
+	  
      ************** Docker-4************
  consepts :- 1.portmaping
              2.taking backup of images and continers
              3.pusing data into the dockerhub			 
- docker run -it -p 8080:8080 --name jenkins imageid  (-p 8080:8080 it is port maping consept)
+ docker run -itd -p 8080:8080 --name jenkins imageid  (-p 8080:8080 it is port maping consept)
  docker commit continerid namebackup
- docker inspect :- to view docker information
+ docker inspect :-to view docker information
  docker logs continerid :- to view last actvitys of continer 
  docker rename oldname newname :-to change imagename 
- docker tag continername newname :- to take backup of a continer (it will creat image as backup)
+ docker tag continername  newname :- to take backup of a continer (it will creat image as backup)
  
  how to push backup images into dockerhub 
- 1:-take backup of continer as same name as shown in dockerhub
+ 1:-take backup of continer as 
+ same name as shown in dockerhub
  2:- it will creat docker image
  3:- login into docker in server with dockerhub credentials
  4:- push image into Docker hub
@@ -84,14 +138,40 @@ Q) can we increse & decrese the disc volume   :-incresing is posobale but not po
 	 * stop server
 	 *Action --> instance settings --->instance type
 Q) difference bettwen stop & kill & posh
-   docker stop continerid :-it eill stop continer 
-   docker kill continerid :- if continer has strucked will use this command to came back  	 
+   docker stop contineri d :-it eill stop  continer 
+   docker kill continerid :- if continer has strucked will use this command to came back  	
+
+    error :- 
+ DOCKER VOLUMES   
+
+     1. What are Volumes
+     2. How to create / list / delete volumes
+     3. How to attach volume to a container
+     4. How to share volume among containers
+     5. What are bind mounts 
    
+   : docker volume  //get information
+   : docker volume create
+   : docker volume ls
+   : docker volume inspect
+   : docker volume rm
+   : docker volume prune
+   
+   docker run --name MyJenkins1 -v myvol1:/var/jenkins_home -p 8080:8080  jenkins :- attching volume to container 
+   docker run --name MyJenkins2 -v myvol1:/var/jenkins_home -p 9090:8080  jenkins :- attching volume to container
+   docker run --name MyJenkins3 -v /Users/raghav/Desktop/Jenkins_Home:/var/jenkins_home -p 9191:8080 jenkins :- attching local mount to 
+   container 
+
+   to find status of docker 
+   sudo systemctl status docker
+    sudo systemctl start docker && sudo systemctl enable docker
+	
      *************** Docker-5********
-  COMPOSE:- To run multi continer at a time 
+  COMPOSE:- To run multi continer at a time (master node and DB node) 
   
   SWARM :- it will disturbute single task to multipale continer, this multipale continer can be installed in multipale servers, 
-           it will manage group of server and enshore tha higher avilability of application 
+           it turns a pool of docker host to single virtual docker host, it will manage group of server and enshore the higher avilability 
+		   of application 
        process:-swarm should be insalised in main server it will genrate a token it shoud be coped to other server 
    comments
    * sudo docker swarm init --advertise-addr serverIP  :-first need to instialsie 
@@ -110,7 +190,7 @@ Q) difference bettwen stop & kill & posh
    5. in master if you type docker node ls :- it will list all nodes conected master 
    6. chnage host name like master, node1 and node2 of all servers by sudo vi etc/hostname and restart server to reset name  :- to avoid confusion 
    7. in master if you type docker network ls :- it will show all networks (bridge and overlay)
-   8. docker pull nginx 
+   8. docker pull nginx (exampal)  :- it will create nginx image 
    9. docker service create --replicas 3 -p 80:80 --name=service1 nginx  :- craet service (continer) main commend to create a service 
       a) service create - to create service 
 	  a) --replicas means Dublication or copys 
@@ -126,33 +206,55 @@ Q) difference bettwen stop & kill & posh
 	   To update any service by new versions 
 	 1. docker pull nginx:1.14.0 :- dounload new version as image  
 	 2. docker images 
-	 3. docker service update --image imagename(nginx:1.14.0) service1  
+	 3. docker service update --image imagename(nginx:1.14.0) service1 
+
+       To stop or remove service in swarm
+     $docker service rm servicename 	   
+	 
+	 how to find manger status from node
+	 $docker node inspect self --format "{{ .ManagerStatus.Leader }}"
    
    13.To exit a server from a docker swarm group use command "docker swamr leave" in node server 
        To remove node in master node list (docker node ls) use command "docekr node rm hostname" 
    14.To stop service " docker service rm servicename"
+       
+	   docker service ls
+	   * docker service ps servicename 
+	   * docker service scale servicename=10
+	   * docker service stop
+	   * docker swarm leave 
+	   * docker node rm hostname
+	   * docker srvice rm servicename 
+	   
+	   commands
+	   $docker version :- gives docker client and server versions information 
+       $docker info    :- gives information of number of running, passed and stoped containers
+       $docker system prune :- used to delete stoped container, unused networks, unused images and build caches. most used cmd
+	   $docker stats   :- provides CPU & memory usage of the container 
+	   $docker events  :- provides information about activitys tacking place in the Docker demine.
+	   $docker node inspect --format=pretty self :- gives information about manager
+	   
+	   
+   Q) how to find swarm token of master
+       docker swarm join-token worker
+       docker swarm join-token manager
    
    compose (writen in yaml) (D5@45min) 
-   1. install docker compose
+    1. install docker compose
       https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
    2. craete docker compose file 
       sudo vi docker-compose.yml
       docker compose file for mysql and wordpress in web to get code to create docker compose file:- https://docs.docker.com/samples/wordpress/
-   3. docker-compose up  :- run docker compose file 
-       
-   
-   
-   
- Q)how to find swarm token of master 
- 
- 
+   3. docker-compose up :- run docker compose file 
+   4. cross check in web by ipaddres:8000   
+        
  docker permission denied 
  sudo usermod -aG docker $USER
  sudo chmod 666 /var/run/docker.sock
-  
-  
-	 
  
+ to uninstall docker 
+ https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker
+   
  DOCKER CONCEPTS
  1.Docker images
  2.Docker continers
@@ -160,4 +262,132 @@ Q) difference bettwen stop & kill & posh
  4.Port maping 
  5.images and continer backup with dockerhub  (D4:-40min)
  6.docker swarm
- 7.docker compose
+ 7.docker compose (creating docker compose file)
+  
+ Quations 
+Q) what is deocker ?
+   docekr is a configuration platform which packages your applications with its dependence in the form of container to ensure that 
+   apppliaction has to run seamlessly in any enveronments like devlopment, testing and prodection. docker is used to building, deploying
+   and managing containerid application.   
+ 
+1. docker default networking
+2. How to reduce container image size?
+3. What's the difference between CMD and ENTRYPOINT in docker file?
+4. What docker --init command does?
+
+5. what is hypervisor ?
+   it is software which makes virtualization posibale, it is also called virtual mechine monitor, it devides the host sysytem and
+   alocates the resources to devided virtual envernoment. virtual enveronment created by the hypervisor is called virtual system.
+   
+6. what is virtualization ?
+   it is process of creating software-based virtule versions of something like computer storage, servers, applications etc.
+   this virtule versions or enveronments are created on single physical hardware system. virtualization allows you to split single system 
+   multipale sections which acts like saparate induvisual system 
+
+7. what is containerization ?
+   Containerization allows you to deploye multipale applications using same operating systems on single virtule mechine or server.
+   application which as been devloped and deployed is bundeled and wraped with all its configuration files and dependence files, this bundeled
+   is called as container 
+   
+8. what is Docker images ?
+   Docker images are source of docker container, docker images are used to create docker container, when we run  docker images a instance
+   of docker container as been created, this docker images can be depolyed to any docker enveronment.
+
+9. what is docker hub ?
+   docker hub is a registory where docker images can be stored.
+   
+10. explain docker architeture 
+    docker contains fallowing components :- 1. docker host
+	                                            a. docker daemon :- docker daemon manges all the containers running in that host
+												   1.containers  :- packages the application with all its conif files and dependences 
+												   2.images      :- images are the source to create containers
+										    2. registory         :- registory is used to store the images
+                                            3. client 			 :- clients will build and manages the containers
+
+11. what is docker file ?
+    docker file is text document which will be having all the commands to build an image, docker build images automaticaly by reading the
+    instructions from a file called docker file.
+
+12  SWARM :- it will disturbute single task to multipale continer, this multipale continer can be installed in multipale servers, 
+           it turns a pool of docker host to single virtual docker host, it will manage group of server and enshore the higher avilability 
+		   of application
+		   
+13. what is docker compose and docker compose file ?
+	docker compose file is yaml file that contains details like services, network and volumes for setting up docker application
+	docker compose can be used to create saparate containers like master node and db node, host them and make them to comunicate each other,
+	each container will expose port to comunicate with each other. 
+	
+14. what is namespace ?
+    namespace adds a layer of isolation in containers, namespace isolates the resources per process or per group based on users, hostname,
+	hard drive, network, process id, inter process comunication.
+	
+	cgroup (control group) limits amount of resources used per process based on CPU, memory, network & hard disk.
+	
+15. what is Docker mechine ?
+    Docker mechine is a tool that install the docker engine on virtual host.
+
+   $docker version :- gives docker client and server versions information 
+   $docker info    :- gives information of number of running, passed and stoped containers
+   $docker system prune :- used to delete stoped container, unused networks, unused images and build caches. most used cmd
+
+16. how to access a running container 
+    $docker exec -it container_id bash
+	
+17. will you lose data when docker container exits
+    no, won't lose data. the data that your applications writes to the container will be preserved 	
+	
+18. where docker being used ?
+    *simplifying configurations 
+    *code pipeline management 
+    *Developer productivity
+    *Aplication isolation 
+    *Debugging capabilities
+    *Multi-tenancy
+    *rapid Deployment 
+
+19. How Docker is deffer from other containerization methods ?
+    it is easy to deploy in any cloud platform, it can get more applications running on the same hardware when compared to other 	
+	
+20. can i use JSON  insted of yaml for my compose file in docker ?
+    yes 
+
+21. how you have used docker.
+
+22. can we remove a passed container 
+    passed container can not be removed
+    we can remove running container but not recomended
+
+23. what are the Docker system requirments. 
+    CPU, Memory, OS, hard disk
+	
+24. How far Docker containers scale
+    there is no limitation but we need to have safficent memory, cpu and OS 
+
+25. what platforms dose Docker runs on ?
+    Docker runs on Linux (ubuntu, redhat, centos), windows & Macos. it also can run on cloud platforms Amazon EC2, ECS, 
+	Google compute cloude, microsoft azure. 
+
+26. What are the states of container 
+    6 states
+	1.created 2.running 3.paused 4.restarting 5.Exited 6.Dead
+	
+27. can container restart by itself
+    no, by default -restart flag is set to false. 	
+	
+28. How will you monitor Docker in prodection
+    by Docker stats and Docker events,
+	Docker stats provides CPU & memory usage of the container 
+	Docker events provides information about activitys tacking place in the Docker demine.
+	
+29. what are the changes are expected in Docker Compose file while moving it to prodection. 
+    *Remove volume bindings :- so that the code saved inside the container and can not be changed outside the containers 
+    *Binding to different port on host
+    *specify restart police
+    *add extra service like log aggregator	
+	
+30. load balancing accross docker container and host 
+    load balancing and HAproxy used to balance the incoming traffic across different avilable containers, if any running container gets 
+    crased another container should be start running and trafic should be reroted to new container.
+	
+	
+   

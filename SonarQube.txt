@@ -1,6 +1,12 @@
+      https://github.com/ravdy
+
 sonarQube is static code analysis tool
    
    it act as a quality managment tool
        -code analysis
 	   -tets reports
 	   -code coverage reports
+	   
+	   
+	   ./sonar.sh status :-comands to check status
+	   netstat -tulpn    :- to check port sonarqube is working

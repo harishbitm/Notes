@@ -1,3 +1,21 @@
+Sample projects
+
+1. https://www.youtube.com/watch?v=nMLQgXf8tZ0&list=PLxzKY3wu0_FJdJd3IKdiM4Om1hGo2Hsdt&index=13  :- prject with git jenkins and Docker container
+2.
+
+jenkins
+
+https://www.youtube.com/watch?v=RvY5b--wnE0  :- shared library
+ Cource 
+
+ https://valaxy.thinkific.com/enrollments
+ 
+ Github links 
+
+1. https://github.com/ravdy 
+2. https://github.com/yankils 
+3. https://github.com/ValaxyTech/DevOpsDemos/
+ 
 Create VPC 
 launch instance
 wright docker file
@@ -288,13 +306,13 @@ pipeline {
 ***declarive pipeline with git checkout*****
 
 git checkout can be done in two ways 
-1. wrighting script in jenkins pipeline consule
-2. wrighting script in github file named as jenkinsfile
+ 1. wrighting script in jenkins pipeline consule
+ 2. wrighting script in github file named as jenkinsfile
 
 Defference between declarative pipeline and scripted pipeline
- Declarative pipelines break down stages into individual stages that can contain multiple steps. 
- Scripted pipelines use Groovy code and references to the Jenkins pipeline DSL(Domine spacific language) within the stage elements without
- the need for steps.
+  Declarative pipelines break down stages into individual stages that can contain multiple steps. 
+  Scripted pipelines use Groovy code and references to the Jenkins pipeline DSL(Domine spacific language) within the stage elements without
+  the need for steps.
 
 project-1
 
@@ -316,3 +334,13 @@ sshagent(['dockerlog']) {
 }
 }
 }
+
+
+
+
+- name: stop previous docker container
+      shell: docker stop $(docker ps -aq)
+    - name: remove stoped container
+      shell: docker rm $(docker ps -aq)
+    - name: delete images
+      shell: docker rmi $(docker images -q)

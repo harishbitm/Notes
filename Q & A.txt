@@ -33,7 +33,7 @@ Q) Diffr b/w GIT and SVM
  * repositors are called centralised repository             * distributrd centralised repositors
  * traking is dificult                                      * logs can be tracked esayly 
  * required continues internet acces                        * not required 
- * more cast                                                * less cast
+ * more cost                                                * less cost
    
  what are status code 500, 400 and 200  
  
@@ -50,7 +50,8 @@ Q) Diffr b/w GIT and SVM
  echo $i
  done 
  
-Q) what is shoft link and hard link
+ 
+ 
 Q) How to copy file to docker container
     docker cp /source /destination :- can copy local to container and viseversa 
 	
@@ -92,13 +93,14 @@ Q) what is the defference between registory and repository
   registory is a type of software to store the repositors (ex:- ECR, JFROG), where as repository is a file system which conntains set of files
 	
 Q) what is defference b/w CMD & Entery point 
+   CDM & Enterypoint are instructions exicuted during runtime 
   *CMD is default instruction which is exicuted when we run container out of image, cmd can be overreaded,
    when we give multiple cmd it will consider only last cmd in docker file.
   
   *Enterypoint can not be overreaded during run time
   
- **CMD instruction can be overreaded during run time but entrypoint can not be overreaded during run time, entery point can be apened with the
-   argument given in the docker file
+ *CMD instruction can be overreaded during run time but entrypoint can not be overreaded during run time, entery point can be apened with the
+   argument given in the docker file or it can be appended with arugument given during run time 
     
 Q) what is docker compoise 
    when we need to run multiple container at a time we will use docker compose, it is advanced version of docker file 
@@ -106,6 +108,8 @@ Q) what is docker compoise
 Q) docker swarm
 Q) what is vertulzation and containerzation
 
+   vertulization allows you to run multipale oprating system on the hardware of a single physical server 
+   containerzation alowa you to deploy multipale applications using the same operating sysyems on single vertula mechine or server 
 
 Q) what is the default values of fallowing
     umask value for root user = 0022  (usermask)
@@ -149,13 +153,13 @@ Q) what is the default values of fallowing
 	 chmod -R 666 directory name 
     
 	*how to change ownersheep for file or directory
-	chown username filename/directory name 
+	 chown username filename/directory name 
    
     *how to change group name for file/directory
-	chgrp newgroupname file/directoryname
+	 chgrp newgroupname file/directoryname
 	
 	*how to change owner and group names at a time
-	chown newuser:newgroupname file/directory
+	 chown newuser:newgroupname file/directory
 	
 	Mostly issues come at the time of build creation 
 1- unable to clone code from SCM
@@ -191,10 +195,11 @@ Q) what is the default values of fallowing
 	 Network load balancer
 	 if we want to balance load based on TCP, UDP & TLS  then we have to use network load balancer.
 	 in network load balancer we can not place security group as well as multiplae rules like application load balancer 
+	 
   Q) what is role in ansible
   
   Q) To access kernel information about process
-  Q) which Command compares 2 specified branches in git
+  Q) which Command compares 2 specified branches in git  ans) git diff branch1 branch2 
   Q) how to change master branch in git 
         or 
      how to point master branch to new branch in git 
@@ -240,4 +245,5 @@ Q) what is the default values of fallowing
 	   owner information, permission, file type, number of links etc and inode number will not contain file name and file content.   
 	     "ls -li" it will show inode number 
 
-        	
+     Q) what is vertical scaliing and horozontal scaling 
+	 

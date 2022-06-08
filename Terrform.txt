@@ -1,5 +1,7 @@
 infrastrucher automation tool 
 
+terraform is used to creat or delete a multipale servers in AWS by wrighting script wriren in json format
+
 steps
 1. download and install visual studyo code to windows :- "https://code.visualstudio.com/download"
 2. doenload packages inside visual studo code a) AWS CLI  b) harishicrop terraform  
@@ -29,7 +31,7 @@ save file "ctrl + s"
 11. "terraform init" intilize in command promt
 12. ""terraform plan" and " terrform apply" it will ask enter a value type "yes"
 
-in the sameway if you want to create vpc instance, creat new folder and new ".tf" file place the bellow script by changeing regarding region
+in the same way if you want to create vpc instance, creat new folder and new ".tf" file place the bellow script by changeing regarding region
 https://www.fosstechnix.com/how-to-create-vpc-in-aws-using-terraform/ 
 
 # Creating VPC,name, CIDR and Tags
@@ -111,6 +113,8 @@ resource "aws_route_table_association" "dev-public-2-a" {
 subnet_id      = aws_subnet.dev-public-2.id
 route_table_id = aws_route_table.dev-public.id
 }
+
+
 commands :- 
 terrform init 
          plan 
@@ -121,3 +125,7 @@ terrform init
 notes:- 
   need to wright files in json formet 
   
+  
+  Q) How do you create resources 
+  Q) How do we ensure the servers are created in defferent platforms 
+  Q how do we integrate multipale platforms with teraform   

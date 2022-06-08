@@ -5,38 +5,43 @@ cat etc/os-release
   *sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb   :- mysql link 
   *sudo dpkg -i mysql-apt-config_0.8.15-1_all.deb  :- below command is to install above downloaded apt repository
   *sudo apt-get update
-  *sudo apt-get install mysql-server               :-it install and ask for password
-  *mysql_secure_installation                                                          }
+  *sudo apt-get install mysql-server  :- it install and ask for password
+  *mysql_secure_installation:- 1st tow no remaing yes during practice but in real time all yes  }
   *sudo apt-get remove --purge mysql-server mysql-client mysql-common -y :- to uninstall mysql from ubuntu
+  
+  mysql --version :- To know the version of mysql in server 
 
 **swith from app node to DB node
-   *mysql -u username -p 
+   *mysql -u username -p :- username is root because in mysql defult user is root 
    *show databases;   :-
    *CREAT DATABASE fundsetransfer;    :-
       *CREAT DATABASE fundsetransfer1;
       *CREAT DATABASE fundsetransfer ; 	:- to creat multipale database 
-   *DROP DATABASE name;                :- to delete
-   *use databasename                   :-it will enter into the database
-   *show tables                        :- 
+   *DROP DATABASE name;                 :- to delete
+   *use database name;                   :-it will enter into the database
+   *show tables;                        :- 
    
 **Backup**
  mysql backup (dump)
- *mysqldump -u username -p databasename > /opt/mysql.sql    :- backup (need to give all permission opt directory)
- *mysqldump -u username -p databasename < /opt/mysql.sql    :- restore 
+ *mysqldump -u username -p databasename > /opt/mysql.sql    :- this command need to exiguted in ubuntu not inside DB 
+                                                               backup (need to give all permission opt directory that's it)
+ *mysql -u username -p databasename < /opt/mysql.sql    :- restore 
  
-***adding user****
-*mysql> CREATE USER 'fosstechnix'@'%' IDENTIFIED BY 'fosstechnix@123';
-*mysql> GRANT ALL PRIVILEGES ON * . * TO 'fosstechnix'@'%';
-*mysql> GRANT ALL PRIVILEGES ON * . * TO 'fosstechnix'@'%';
+***adding user**** 
+ enter into the mysql DB node
+* CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+* GRANT ALL PRIVILEGES ON * . * TO 'fosstechnix'@'%';  ("*.*" in place of . u can give database name's)
+* FLUSH PRIVILEGES;
 
-  
+Select user from mysql.user; :- to list all the users 
 
-
-
-
-
-
-
+  ip, un, psw, dbname 
+  IPaddres, username, password, database name need to give for devloper
+    
+	For Prodection Enveronment we will use AWS RDS instance 
+        UAT & testing Envernonment we will use mysql database 
+how to change root password 
+mysqladmin --user=root --password=oldpassword password "newpassword"
 
 
 
@@ -54,5 +59,7 @@ cat etc/os-release
    15  sudo apt-cache policy mysql-server
    16  sudo apt install -f mysql-community-client=5.7.35-1ubuntu18.04
    18  mysql --version
+   19  sudo cat /var/log/mysql/error.log   :- to check the log files regarding mysql
+   
 
 

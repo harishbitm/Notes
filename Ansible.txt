@@ -1,0 +1,46 @@
+ansable is a configaration managment tool (alternartive tool chef,pupet, salt)
+ansibale is agent less server 
+
+
+server (master) 
+* install ansible from degital ocien website
+
+ansible all -m ping 
+
+server (clint)
+
+
+
+ 
+server (clint-2) 
+
+
+playboook
+1. create .yml file in opt
+2. 
+
+
+quations
+
+1.COPY failed: file not found in build context or excluded by .dockerignore: stat rushi: file does not exist
+
+
+ansible configuration for Amazon linux 2
+
+  installation
+  rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  yum install ansible -y 
+  ansible --version
+  
+ password less authotication between servers
+1.create users with same name and password in all servers
+2.make congiguration changes in sudo visudo and etc/ssh/sshd_config files in all servers
+3.yum install polkit && service sshd restart. in all servers
+4.switch user in master and genrate ssh-keys
+5.ssh-copy-id server-ip :- it will copy authorized keys to respective server
+6.ssh 'server ip' :- try to connect remote server
+
+
+usefull commands 
+ansible-playbook -i hosts filename.yml :- -i is used when you want to run hosts file which is created in your own directory.
+ansible-playbook hosts filename.yml --check :- it will check errors in yml file 

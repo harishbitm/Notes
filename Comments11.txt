@@ -1,4 +1,4 @@
-
+Thilak@123 :- fed
 harishbitm@gmail.com
 harishkeerthe1234 
 Harish@1234 :- AWS pasword
@@ -9,17 +9,27 @@ Harish@341
 harishbitm@outlook.com
 2552489Hk@
 
-harishbitm          :- docker
+harishbitm          :- docker hub
 Harish@1234
 
-server         --- 107.22.147.18
-server name    --- ubuntu
-server command ---ssh -i "harishkeypair.pem" ubuntu@ec2-107-22-147-18.compute-1.amazonaws.com
+Nevergiveup#1
+8867238169Hk
+
+REPORTING MANAGER
+NAME  : Dawan Kulakarni
+DESIGNATION : REPORTING MANAGER
+
+HR MANAGER
+NAME :  MS RAJU
+DESIGNATION: HR MANAGER
+
+https://github.com/geerlingguy/ansible-for-devops
+
 
       GIT 
 	  
 	git tutorials https://youtu.be/vMdSqMf6BPY   
-
+                  https://www.youtube.com/playlist?list=PL_euSNU_eLbegnt7aR8I1gXfLhKZbxnYX
 1-ls (listing files and directory) 
 2-git add filename (git add. , git add *) 
 3-git status
@@ -32,8 +42,9 @@ server command ---ssh -i "harishkeypair.pem" ubuntu@ec2-107-22-147-18.compute-1.
       https://youtu.be/csHeaYWspic
 
 * ls :- listing both file & directory 
-* find . -maxdepth 1 -type f :- To list only files 
-  find . -type f (f-files, d-directory)
+
+  
+  vi editor details :- https://www.tutorialspoint.com/unix/unix-vi-editor.htm
 
 
 To add user name :- git config --globle user.email "@gmail.com"
@@ -52,6 +63,7 @@ To creat file :- touch file name
 07-git push -u origin master
 
 how to remove old URL 
+git remote -v :- list origin url 
 git remote rm origin 
 
 * git clone url :- to download code
@@ -62,26 +74,36 @@ how to give access to the user for preticular repository
 how to change public to private 
 settings --- visability of rpositorys 
 
-**diff b/w reset and revert commands
+**diff b/w reset, revert and checkout commands
      
-	rest =    "git rest --hard head~1" (head~1 or commit_id)
+	reset =    "git reset --hard head~1" (head~1 or commit_id)
     revert =  "git revert commit_id"
 	
-    reset will undo the changes in the file and it will remove the commits
+    reset will remove the commits  
     revert will undo the chnages in the file but it will not delete the commit_id, it will create a new commit_id
 
-    where to use reset and revert 
+    where to use reset, revert and checkout 
 	rest is used when comments are in local 
-    rest is used when we want to undo the changes of file which is not pushed into the central repository (present in local repository)
-    revert is used when we want undo the changes of file which is in central repository 
+    rest is used when we want to undo the changes of file which is not pushed into the remote (present in local repository)
+    revert is used when we want undo the changes of file which is in remote 
+	checkout is used when we want to undo the changes to the tracked file which is in working area (this cmd is not applicable for untacked file)
 
-01- git reset --soft         :- to get back data from repocetory to stageing area  
-02- git reset head file name :- To get back data from stageing area to working area
-03- git reset --mixed cid
+    diff b/w git reset --hard commit_id & git reset --soft commit_id 
+
+    --hard :- it will reset the commit and also it will remove files in the working area and staging area and not remove untracked files 
+	--soft :- it will reset the commit and keeps the files in staging area 
+	
+01- git reset --soft HEAD~1         :- to get back data from local to stageing area 
+02- git reset --hard HEAD~1         :- it will remove commit and also remove files in staging and working area  
+03- git reset --mixed comm_id       :- it will move file from remote to working area (git reset HEAD~1)
+04- git reset HEAD filename         :- To get back data from stageing area to working area (git restore --staged filename)
+
 
 01. git revert <commit_hash>
 
     https://stackoverflow.com/questions/22682870/how-can-i-undo-pushed-commits-using-git
+	
+   git rebase, folking https://www.youtube.com/watch?v=xje_4h9fTK4&list=WL&index=1
 
 git pull origin master --allow-unrelated-histories   :- if u want to pull  data from deferent repository 
  
@@ -101,8 +123,13 @@ git log --since=yy-mm-dd --untill=yy-mm-dd
 07.git stash drop     -- TO delete file in stash memory
 08.git stash drop ID  -- to delete perticual file in stash memory 
 
+     defference b/w apply, pop & drop 
+	   apply = copy from stash to stageing
+	   pop   = cut and past from stash to stageing
+	   drop  = delete in stash 
+
   ***BRANCH ***
-01.git branch NAME          ---To creat branch 
+01.git branch BranchNAME          ---To creat branch 
    git branch               ---it will list all branch 
 02.git checkout NAME ---To enter into branch  
 03.git merge branch.name    --- to merge branch data ( )
@@ -121,11 +148,29 @@ git log --since=yy-mm-dd --untill=yy-mm-dd
 	 5.merge main branch to the current branch
 	 6.fix if there are any conflicts
 	 7.push the changes
-	 8.create pull request
 	 
- --> if we want to undo any last changes in saved file use bellow command 
-      " git checkout filename " 
+	 
+Branching strategies
+  1. Trunk based strategies :- it will be having single branch called main branch 
+  2. feature branch         :- in feature branching strategie there will be a main branch, from the main branch devloper is going to 
+	                           pull the code & devlopes the feature branch after that he is going to merge with main branch, this strategie
+						       is used when there is requirment to devlop the code or prodect with in short term 
+  3. Realese branch         :-
+  4. git flow               :- there will be a main branch from main branch there will be a devlopment branch and from that devlopment branch 
+	                           there will be defferent branchs like relese branch 1, 2 and feature branch 1, 2
+  5. enveronment branch     :- there will be a main branch --> devlopment branch --> stageing --> test --> prodection branch from there we 
+	                           are going to mearge to main branch (not recomended in interview) 
+								  
+	  git branch 3ndBranch-name 2ndbranch-name	(by using this command 3drbranch is created from 2nd branch)	
+	  
+	  https://www.youtube.com/watch?v=fCNX8yLcw2Q  :- branching
 
+*****diff b/w git clone & pull & fetch*****
+
+git clone :- it is used to download entair repository
+git fetch :- it will dowmload latest modifed file from central repository and store that data into the remote origin master not into the local repository   
+git pull  :- it is used to get perticularly latest modified file from the central repository to local repository(fetch + merge)
+git merge :- it is used to merge remote origin master data into the local repository	  
 
   *** Edeting file in linux ***
 cd folder name      --To enetr into subfolder 
@@ -138,12 +183,27 @@ git tag name commit ID -- to create tag
 git tag                -- to list tags
 git push origin tag name  -- to push tags into repository
 
-diff b/w git clone & pull & fetch 
+   svn to git migration procedure 
+   https://www.atlassian.com/git/tutorials/migrating-overview
 
-git clone :- it is used to download entair repository
-git fetch :- it will dowmload latest modifed file from central repository and store that data into the remote origin master not into the local repository   
-git pull  :- it is used to get perticularly latest modified file from the central repository to local repository(fetch + merge)
-git merge :- it is used to merge remote origin master data into the local repository
+    Prepare your environment for the migration.
+    Convert the SVN repository to a local Git repository.
+    Synchronize the local Git repository when the SVN repository changes.
+    Share the Git repository with your developers via Bitbucket.
+    Migrate your development efforts from SVN to Git.
+
+   DBS task 
+   
+   $ git remote add origin /var/save/my-repo/.git/ :- to make local-repo as remote (got remote -v)
+   $ git push master --force --no-verify           :- to ignore master --force push to remote
+     git init --bare
+     git config --global user.email "hackerrank"
+     git config --global user.name "hacker"
+     git add .
+     git commit -m 'my first commit'
+     git remote add origin /var/save/my-repo/.git
+     git push -u origin master --force
+
 
 
              ****linux*****
@@ -164,7 +224,7 @@ git merge :- it is used to merge remote origin master data into the local reposi
 15.sudo vi filename   ---  To edit file (after editing file press ESC and :wq to exit from file by saving data)
 Note :- To creat files rather then home folder 1. we need to switch to root user, comment to switch to root user " sudo su ". 
                                                2. sudo touch filename or mkdir directory name
-16.sudo chown -R ec2user:ec2user tomcat8   :- to change ownership of amy file											   
+16.sudo chown -R ec2user:ec2user tomcat8   :- to change ownership of any file											   
 											   
 15.sudo wget link   --- To download pakages (wget-it download pakages present in web to server)tar file need to dwonload for linux
                (Linux-04 video)
@@ -193,7 +253,20 @@ Note :- To creat files rather then home folder 1. we need to switch to root user
 	  su username
 	*To reset user password 
 	  sudo passwd username
-	  
+	  id username :- to check user details
+	* To delete user 
+	   userdel -r username
+	* how to create group 
+	   $groupadd groupname
+       $cd etc/group :- to check groups
+	   $groupdel groupname 
+	   
+	* how to add user in group 
+      usermod -a -G groupname username 
+
+    * how to add user to sudo group (admin access)	
+      sudo usermod -aG sudo username 	
+       	   
 	*some times sudo will not work due to sudours file corroption then fallow bellow link
 	  https://aws.amazon.com/premiumsupport/knowledge-center/ec2-sudoers-syntax-errors-sudo/
 	  
@@ -204,7 +277,7 @@ Note :- To creat files rather then home folder 1. we need to switch to root user
        *ssh username@ip-address
 	   *exit :- To exit from that server 
 	
-  How To copy data from one server to another server
+  How To copy data from one server to another 
          sudo scp source username@IPaddres:destination-path   :- to copy file 
 		 sudo scp -r source username@IPaddres:destination-path   :- to copy directory
  	ex:- sudo scp opt/file-1 harish@34.239.107.139:/opt/harish/
@@ -213,18 +286,20 @@ Note :- To creat files rather then home folder 1. we need to switch to root user
 		  sudo chmod 777 directoryname
 		  
 	 *passwordgenrator.net :- website used to creat passwords  
-  How to chenge Hostname 
+  How to change Hostname 
     A- go to etc directory --- sudo vi hostname  (open hostname file)
     B- change IP addres to name 
     c- go to AWS SERVER -INSTANT STATE -REBOOT
-       OR sudo reboot  :- to restart server from linux
+       OR sudo reboot  :- to restart server from linux CLI
 	   
 21.top  (to know CPU memory)
    downloading of folder strutcher
      1-Build process
     *ps -ef to know process which are runing in the backend 
+	*ps -ef |grep 8080  :- to check wether port is runing r not 
 	*search and replace command 
 	 enter into the file then :- ::s/presend word/new word/g
+	*kill -9 ppid :- -9 is forcefully & ppid parent process id 
 	
 22.sudo apt-get update
 22.sudo apt-get install default-jdk  or sudo apt-get install openjdk-8-jdk
@@ -258,6 +333,41 @@ topics
    6.sudo mvn clean install, where pom.xml file is present 
    7. 
    
+   ******************* MAVEN ***********************
+   
+   
+   *Maven is build tools and project management tools
+   *by using maven we can build number of projects into output like jar, war files 
+   *we can esayly add jar and other dependancy file into the project by using maven
+   *by using maven we can esayly integrate over project with source contral system like git 
+   *maven provides project information, log decument, dependancy list and unit test reports etc.
+   
+   maven build life cycle
+   1.default :- it is main life cycle, it is responceble for project deployment
+   2.clean   :- to clean the project and remove all files generated during the last build
+   3.site    :- to create projects site documentation
+   
+   maven goals  
+   1. validate  :- check all the necessary information is avilable for build
+   2. compile   :- compile the source code 
+   3. test      :- test the compiled source code and run unit tests
+   4. package   :- package the compiled source code into the distributable formate (war & jar)
+   5. install   :- install the package into the local repository
+   6. deploy    :- copy the package to the central repository
+   
+   
+   mvn test -DskipTests
+   
+   how to set enveronment variables 
+   
+   *install maven in opt
+   *create maven.sh in etc/profile.d place bellow script and give chmod 777 permission to that file 
+      # Apache Maven Environment Variables
+      # MAVEN_HOME for Maven 1 - M2_HOME for Maven 2
+        export M2_HOME=/opt/maven
+        export PATH=${M2_HOME}/bin:${PATH}
+   * source maven.sh :- load file in server leveal		
+   
 note:- apt-get will only work on ubuntu, Debian, mint, kali linux servers
        apt-get will not work on centos, RHEL, Fedora, mach, Arch servers
 	   
@@ -274,12 +384,18 @@ Q) where will be the local repository in system and server
   
   how to connect to AWS server using putty
   
+Q) what are the default mandeatery options in pom.xml file
+    project, moduel version, group_id, artifact_id, version.
+  
   to connect thoru putty u need ppk.file
   pem.file can be converded to ppk.file by puty.gen shoftware 
+  
 
    ****Tomcat***
 29.sudo wget tomcatlink
 30.sudo tar -xvf taomcatname---->To untar file
+        tar -tvf filename ----> to view files inside tar file without extract
+		tar -cvf filename.tar ----> to create tar file 
 31.go to bin and do ls ---> sh startup.sh (startup.sh) --->to start tomcat
   *scurity group settings need to do in server to run tomcat application --->security-->inbond ---->add rule
   *For tomcat we need to change port number in server by server.xml file 8080--->5050
@@ -300,6 +416,11 @@ Q) where will be the local repository in system and server
    
    *how to serch file name 
      find / -name filename
+	 find / -iname filename :- i to ignore case 
+	 find /opt -iname *ilenam*  
+	 find / -type f -name filename ( f for files & d for directores )
+     find . -maxdepth 1 -type f :- To list only files 
+     find / -empty
  
    1-one server  to other server
 ssh user name @destinaton    
@@ -314,4 +435,12 @@ ssh user name @destinaton
    Q/A 
    1- how to move data from two folders to one repository 
    2- how to push tags to central
+      git tag tagname 
+      git push origin tagname 
+	  
+	  In case you want to tag a specific commit
+	  git tag -a v1.0 commit_id -m "Your message here"
+	  
+	  
+	  https://www.youtube.com/playlist?list=PLV5mSQ9gzMc5C1RH6-9Vo0kaJy_wHNKQw   :- jira tutorials
 
