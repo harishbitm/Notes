@@ -1,0 +1,163 @@
+apt-get update
+get.docker.com
+   This script is meant for quick & easy install via:
+   #   $ curl -fsSL https://get.docker.com -o get-docker.sh
+   #   $ sh get-docker.sh
+  after installing need to give user permission
+  sudo usermod -aG docker $USER  
+  sudo chmod 666 /var/run/docker.sock
+image = tar file = zip file 
+docker pull ubuntu
+docker images
+docker pull centos
+docker run -it imageID :- (it = interacrive terminal) It will creat container
+docker run -itd imageid :- it will creat continer but it will not go inside continer
+docker exec -it continerid /bin/bashm :- cmd used to enter into continer so that u can come out by typing exit without stoping continer   
+exit :- it will stop container 
+docker start continerID
+docker ps :- it will view running continer
+docker ps -a :- To view all continers
+docker attch continerID :- to get into the continer
+ctr+pq :- it will come out from continer without stoping
+docker stop continerID :- it will stop continer
+docker rename oldname newname
+docker run -it --name icici-prod2 imageID (@30min) :- it will creat a continer with requred name 
+docker restart continerid
+docker -rm containerid  :- remove
+docker rm containerid -f
+docker rm $(docker ps -aq) -f :- it will remove running continer
+docer ps -aq :- view only continer id
+docker stop $(docker ps -aq)
+docker rmi imageID :- remove image 
+docker images -q:- only images id
+docker rmi $(docker images -q)
+can we remove a running container :- yes we can but not recmended
+
+note :-
+       N number of continers can be created by using one images 
+   ****** Docker-3
+Docker build -t imagename .:- (-t=tag, "."= if your in same path u have to give "."  if not need menstion path) = Docker file to Docker image 
+Docker run -it imageID = Docker image to Docker container
+How to creat docker file
+ FROM ubuntu
+ MAINTAINER harish <harish@gmail.com>
+ RUN apt-get update
+ ARG DEBIAN_FRONTEND=noninteractve
+ RUN apt-get install git maven -y
+ RUN apt-get install wget -y 
+ RUN wget linkaddres 
+ RUN cd /opt/ && wget linkaddres (to run two commands use && symbole)
+ EXPOSE 80 :- to provide port number to continer
+ COPY :- to copy data in server 
+ ADD  :- to get data from external or can use wget
+ WORKDIR /temp/   :-it is used if u want to save container in any pertiqular directory 
+ 
+ docker tag imagename imagenamebackup:-  it will take backup (copy) total image 
+ 
+ {sudo usermod -a -g docker $USER
+ sudo chmod 666  /var/run/docker.sock} by this two commands we can use user without sudo 
+ 
+     ************** Docker-4************
+ consepts :- 1.portmaping
+             2.taking backup of images and continers
+             3.pusing data into the dockerhub			 
+ docker run -it -p 8080:8080 --name jenkins imageid  (-p 8080:8080 it is port maping consept)
+ docker commit continerid namebackup
+ docker inspect :- to view docker information
+ docker logs continerid :- to view last actvitys of continer 
+ docker rename oldname newname :-to change imagename 
+ docker tag continername newname :- to take backup of a continer (it will creat image as backup)
+ 
+ how to push backup images into dockerhub 
+ 1:-take backup of continer as same name as shown in dockerhub
+ 2:- it will creat docker image
+ 3:- login into docker in server with dockerhub credentials
+ 4:- push image into Docker hub
+
+ 1:-docker commit b960d1a8af5b harishbitm/prodection01backup
+ 2:-docker images
+ 3:-docker login
+ 4:-docker push harishbitm/prodection01backup
+ Q) can we increse & decrese the instance type (CPU) :-yes
+Q) can we increse & decrese the disc volume   :-incresing is posobale but not posibale to decresing
+     how to increse CPU storage
+	 * stop server
+	 *Action --> instance settings --->instance type
+Q) difference bettwen stop & kill & posh
+   docker stop continerid :-it eill stop continer 
+   docker kill continerid :- if continer has strucked will use this command to came back  	 
+   
+     *************** Docker-5********
+  COMPOSE:- To run multi continer at a time 
+  
+  SWARM :- it will disturbute single task to multipale continer, this multipale continer can be installed in multipale servers, 
+           it will manage group of server and enshore tha higher avilability of application 
+       process:-swarm should be insalised in main server it will genrate a token it shoud be coped to other server 
+   comments
+   * sudo docker swarm init --advertise-addr serverIP  :-first need to instialsie 
+   * it will genarate token copy that token to other node (server)
+   * docker node ls  :- it will list all node (server) conected to master
+   * docker network ls :- it list all network 
+     note :- * bridge is used to communicate between continers with in server 
+             * ingerss (overlay network) used to commincate with other server, ingers will form after intialiging svarm  
+   *docker swarm :- it will list commends used in swarm
+   
+   steps
+   1. lanch 3 instances, 1 for master, 2 for nodes 
+   2. install docker in all server 
+   3. intialise docker swarm in master it will genrate token :- sudo docker swarm init --advertise-addr serverIP
+   4. copy that token to other nodes 
+   5. in master if you type docker node ls :- it will list all nodes conected master 
+   6. chnage host name like master, node1 and node2 of all servers by sudo vi etc/hostname and restart server to reset name  :- to avoid confusion 
+   7. in master if you type docker network ls :- it will show all networks (bridge and overlay)
+   8. docker pull nginx 
+   9. docker service create --replicas 3 -p 80:80 --name=service1 nginx  :- craet service (continer) main commend to create a service 
+      a) service create - to create service 
+	  a) --replicas means Dublication or copys 
+	  b) -p 80:80 for port maping 
+	  c) --name=sevice1 
+	  d) nginx is image name 
+	      *docker service ls :- to least services
+		  *docker service ps service1 :- to know indetail of replicas of any service 
+   10. check nginx status in web by ipaddres and port number 80
+   11. docker service ps service1 :- to know detail information of any service 
+   12. docker service scale service1=6 :- to increas and decrese continers for perticuler service 
+       
+	   To update any service by new versions 
+	 1. docker pull nginx:1.14.0 :- dounload new version as image  
+	 2. docker images 
+	 3. docker service update --image imagename(nginx:1.14.0) service1  
+   
+   13.To exit a server from a docker swarm group use command "docker swamr leave" in node server 
+       To remove node in master node list (docker node ls) use command "docekr node rm hostname" 
+   14.To stop service " docker service rm servicename"
+   
+   compose (writen in yaml) (D5@45min) 
+   1. install docker compose
+      https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
+   2. craete docker compose file 
+      sudo vi docker-compose.yml
+      docker compose file for mysql and wordpress in web to get code to create docker compose file:- https://docs.docker.com/samples/wordpress/
+   3. docker-compose up  :- run docker compose file 
+       
+   
+   
+   
+ Q)how to find swarm token of master 
+ 
+ 
+ docker permission denied 
+ sudo usermod -aG docker $USER
+ sudo chmod 666 /var/run/docker.sock
+  
+  
+	 
+ 
+ DOCKER CONCEPTS
+ 1.Docker images
+ 2.Docker continers
+ 3.Docker file
+ 4.Port maping 
+ 5.images and continer backup with dockerhub  (D4:-40min)
+ 6.docker swarm
+ 7.docker compose

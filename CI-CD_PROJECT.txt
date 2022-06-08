@@ -1,0 +1,318 @@
+Create VPC 
+launch instance
+wright docker file
+git hub repository branch
+git hub code pull
+build
+artifactory/war
+arteyfactory --- image
+server --- docker image
+push deocker image to docker hub
+docker pull test
+docker swarm service
+
+ 
+procedure 
+1.instal java
+2.install jenkins
+  in sudo visudo give "jenkins ALL=(ALL:ALL) NOPASSWD=ALL"
+3.install maven in server
+   sudo apt-get install maven
+4. install docker and give permissions
+5. go to jenkins consule and wright script 
+    stage1:-SCM Checkout
+	stage2:- maven install 
+	stage3:- build image
+	stage4:-push code to dockerhub 
+	        go to grovvy pipeline syntex
+			select :- withCredentials bind credential to variable
+			in variable tab give text what ever text you want to display 
+			ADD:- SELECT secret text
+			     new tab will open 
+				  in kind select secret text
+				  in secret give passwd 
+				  in ID give docker-credintial (give what ever you want) then save
+			genrate pipe line bellow line will be output
+			withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerhubpwd')])
+			now we need to login to docker hub by 
+			sh "docker login -u devopsbyrushi -p ${dockerhubpwd}"
+			
+scripts on pipeline :- https://github.com/javahometech/my-app
+				 		
+the bellow script is scripted pipeline 
+
+node{
+    stage('SCM Checkout'){
+	git credentialsId: 'git-hub', url: 'https://github.com/devopsrishi/Rishi-project.git'
+	}
+	stage('mvn Package'){
+    sh 'mvn clean install'
+  }
+  stage('now building docker image'){
+  sh 'docker build -t harishbitm/ci-cd_project .'
+} 
+  stage('Pushing docker image'){
+  withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerhubpwd')]) {
+   sh "docker login -u devopsbyrushi -p ${dockerhubpwd}"
+    }
+    sh 'docker push devopsbyrushi/rushi:1'
+  }
+}
+
+ note :- if maven is not installed before in server we can install by script 
+ stage('mvn Package'){
+ dev mvnHome= tool name: 'maven-3', type: 'maven'
+ dev mvnCMD = "${mvnHome}/bin/mvn"
+    sh "${mvnCMD} clean install"
+  }
+ 
+**********
+node{
+    stage('SCM Checkout'){
+	git credentialsId: 'github-credinceal', url: 'https://github.com/harishbitm/CI-CD_PROJECT.git'
+	}
+	stage('mvn Package'){
+    sh 'mvn clean install'
+  }
+  stage('now building docker image'){
+  sh 'docker build -t harishbitm/ci-cd-project-on-dev-serever .'
+} 
+  stage('Pushing docker image'){
+  withCredentials([string(credentialsId: 'docker-credinceal', variable: 'docler-cred')]) {
+   sh "docker login -u harishbitm -p ${docler-cred}"
+    }
+    sh 'docker push harishbitm/ci-cd-project-on-dev-serever:1'
+  }
+}
+
+*********************
+vi Dockerfile
+
+
+FROM tomcat:8
+COPY target/*.war /usr/local/tomcat/webapps/
+
+COPY target/*.jar /tmp/tomcat/webapps/
+
+sh 'docker build -t devopsbyrushi/sample1 .'
+
+
+
+
+
+  stage('Pushing docker image'){
+  withCredentials([string(credentialsId: 'docker-cred1', variable: 'dockerhubpwd')]) {
+   sh "docker login -u devopsbyrushi -p ${dockerhubpwd}"
+    }
+    sh 'docker push devopsbyrushi/sample1'
+  }
+}
+
+
+*****************************************
+
+node{
+    stage('SCM Checkout'){
+    git 'https://github.com/rkraj1245/flight.git'
+    }
+}    
+
+
+****************
+
+node{
+    stage('SCM Checkout'){
+    git 'https://github.com/rkraj1245/flight.git'
+    }
+   stage('Building the code'){
+   sh label: '', script: 'mvn clean install'
+}
+}   
+
+*********
+
+3rdstep
+
+node{
+    stage('SCM Checkout'){
+    git 'https://github.com/rkraj1245/flight.git'
+    }
+   stage('Building the code'){
+   sh label: '', script: 'mvn clean install'
+}
+   stage('Building the image'){
+   sh label: '', script: 'docker build -t devopsbyrushi/sample2 .'
+}
+}   
+
+
+
+4th step:
+
+node{
+    stage('SCM Checkout'){
+    git 'https://github.com/rkraj1245/flight.git'
+    }
+   stage('Building the code'){
+   sh label: '', script: 'mvn clean install'
+}
+   stage('Building the image'){
+   sh label: '', script: 'docker build -t devopsbyrushi/sample2 .'
+}
+   stage('pushing the image'){
+withCredentials([string(credentialsId: '123456', variable: 'dockerpassword')]) {
+    sh label: '', script: "docker login -u devopsbyrushi -p ${dockerpassword}"
+}
+   sh label: '', script: 'docker push devopsbyrushi/sample2'
+   
+}   
+
+************************************
+
+
+}
+   stage('pushing the image'){
+withCredentials([string(credentialsId: '123456', variable: 'dockerpassword')]) {
+    sh label: '', script: "docker login -u devopsbyrushi -p ${dockerpassword}"
+}
+   sh label: '', script: 'docker push devopsbyrushi/sample2'
+   
+}  
+
+
+
+
+orginal
+} 
+  stage('Pushing docker image'){
+  withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerhubpwd')]) {
+   sh "docker login -u devopsbyrushi -p ${dockerhubpwd}"
+    }
+    sh 'docker push devopsbyrushi/rushi:1'
+  }
+}
+
+
+*************************************
+ project-1
+ 
+node{
+    stage('SCM Checkout'){
+	git credentialsId: 'github-credinceal', url: 'https://github.com/harishbitm/CI-CD_PROJECT.git'
+	}
+	stage('mvn Package'){
+    sh 'mvn clean install'
+  }
+  stage('now building docker image'){
+  sh 'docker build -t harishbitm/ci-cd-project-on-dev-serever .'
+} 
+  stage('Pushing docker image'){
+  withCredentials([string(credentialsId: 'docker-credinceal', variable: 'dockerlogin')]) {
+   sh "docker login -u harishbitm -p ${dockerlogin}"
+    }
+    sh 'docker push harishbitm/ci-cd-project-on-dev-serever'
+  }
+  stage('Run Container on Dev Server'){
+     def dockerRun = 'docker run -p 8080:8080 -d --name my-app harishbitm/ci-cd-project-on-dev-serever'
+     sshagent(['dockerlog']) {
+     sh "ssh -o StrictHostKeyChecking=no ubuntu@52.91.9.129 ${dockerRun}"
+     }
+}
+}
+*****
+project-2
+node{
+
+stage('scm checkot'){
+
+echo "scm checkout from github"
+git 'https://github.com/harishbitm/CI-CD_PROJECT.git'
+}
+stage('mvn install'){
+
+sh 'mvn clean install'
+}
+stage('build container'){
+    sh 'docker build -t harishbitm/ci-cd-project-on-dev-serever .'
+    }
+stage('push code to dockerhub'){
+
+withCredentials([string(credentialsId: 'docker-credinceal', variable: 'dockerlogin')]) {
+    sh "docker login -u harishbitm -p ${dockerlogin}"
+	
+	}
+}
+   
+   stage('push code to dockerhub'){
+    sh 'docker push harishbitm/ci-cd-project-on-dev-serever'
+    }
+    stage('Run Container on Dev Server'){
+     def dockerRun = 'docker run -p 8080:8080 -d --name my-app harishbitm/ci-cd-project-on-dev-serever'
+     sshagent(['dockerlog']) {
+     sh "ssh -o StrictHostKeyChecking=no ubuntu@52.205.128.242 ${dockerRun}"
+     }
+}
+    }
+    
+
+note:- to run commands on remote mechine we use SSH
+
+
+
+
+
+stage1:-SCM Checkout :- it will log in into the git hub and pull code into server 
+stage2:-mvn clean install
+stage3:-build docker image 
+stage4:-push docker image to docker hub by providing docker credential using secret text(bind credential variable)
+stage5:-run container on different server by pusing image to another server
+          prerequisite to run continer in other server
+		   1.docker need to be instaled 
+		   2.jenkins ALL=(ALL:ALL) NOPASSWD: ALL
+		   3.sshagent plugin need to be instaled in jenkins 
+		   4.ADD credential by username and privire key, username should be ubuntu 
+		   
+*****declarative pipline starts with pipeline and agent any as shown bellow (pipeline, agent any, stages, stage, steps)*****
+
+pipeline {
+     agent any
+     stages{
+	  stage('welcome'){
+	       steps{
+		   echo "welcome to declarative pipeline"
+		   }
+		   }
+}
+}
+
+***declarive pipeline with git checkout*****
+
+git checkout can be done in two ways 
+1. wrighting script in jenkins pipeline consule
+2. wrighting script in github file named as jenkinsfile
+
+Defference between declarative pipeline and scripted pipeline
+ Declarative pipelines break down stages into individual stages that can contain multiple steps. 
+ Scripted pipelines use Groovy code and references to the Jenkins pipeline DSL(Domine spacific language) within the stage elements without
+ the need for steps.
+
+project-1
+
+pipeline{
+agent any 
+stages{
+stage('mvn install'){
+steps{
+sh 'mvn clean install'
+sh 'mv agent/target/*.jar agent/target/myapp.jar'
+}
+}
+stage('deploy on tomcat-dev'){
+steps{
+sshagent(['dockerlog']) {
+   sh ' scp -o StrictHostKeyChecking=no agent/target/myapp.jar ubuntu@110.10.1.11:/opt/tomcat8/webapps/ '  // scp :- current copy  and hear you can use both public and private IP'S
+}
+}
+}
+}
+}

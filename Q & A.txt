@@ -1,0 +1,243 @@
+Q:- topics to learn
+    1. Branching statage
+	2. Explain maven lifecycle stages
+	3. 5 plugins in jenkins
+	4. prepare for daily activity
+
+Q) types of pipeline and defference between scripted pipeline and declarative pipeline  
+   1.scripted pipeline
+   2.declarative pipeline 
+
+   in declative pipeline there will be steps inside stages, and it is possible to restart a induvisuble stage in
+   declarative pipline where as it is not possible in scripted pipeline 
+Q) how can we give approvel in between stages in jenkins pipeline
+
+    by input command inside stage 
+	 input(message: requist for approvel, ok: approve )
+	 
+Q) 5 importent plugins in jenkins
+    
+    1.Role-based Authorization Strategy
+    2.view plugin--a)list view b)nested view
+    3.blue oscean 
+    4.disk usage
+    5.restrict where this build can run 	
+
+Q) what is upstream and downstream jobs in jenkins 
+    *upsteam job means parent job & downstream job means child job 
+	*upstream job will triger the downstream job 
+	
+Q) Diffr b/w GIT and SVM
+
+              SVN                                  and               GITHUB
+ * repositors are called centralised repository             * distributrd centralised repositors
+ * traking is dificult                                      * logs can be tracked esayly 
+ * required continues internet acces                        * not required 
+ * more cast                                                * less cast
+   
+ what are status code 500, 400 and 200  
+ 
+ 
+ shall script what $$ and $* and $#
+ $$ prints the status ID 
+ $* prints the arguments given 
+ $# prints the number of arguments given in the scripts
+ 
+ wright shall script to print from 1 to 10
+ echo "print 1 to 10"
+ for ((int=1;i<=10; i++))
+ do
+ echo $i
+ done 
+ 
+Q) what is shoft link and hard link
+Q) How to copy file to docker container
+    docker cp /source /destination :- can copy local to container and viseversa 
+	
+Q) how to expose contaier publicly 
+     docker run -it -p hostport:containerport --name jenkins imageid
+     docker run -it -p 8080:8080 --name jenkins imageid
+	
+	defference between expose and publish
+	  
+	  expose :- while exposed ports can only be accessed internally,
+	  publish :-  published ports can be accessible by external containers and services.
+	  Whereas publishing a port using either -P or -p exposes it, exposing a port using EXPOSE or –expose does not publish it. 
+	  
+   there are two ways to expose port 
+   1. By writing a EXPOSE cmd in Docker file (EXPOSE 8080)
+      By default, the EXPOSE instruction does not expose the container’s ports to be accessible from the host. 
+	  In other words, it only makes the stated ports available for inter-container interaction.    
+   2. By writing a expose flag at run time string (docker run -it --expose=8080 imageid) 
+       by useing this flag a range of ports can be exposed 
+	   
+	there are two ways to publish port
+   1. -P (upper case) Using the -P flag at runtime lets you publish all exposed ports to random ports on the host interfaces.
+       It’s short for –publish-all.
+   2. -p (lower case) Using the -p flag at runtime lets you publish a container’s specific port(s) to the Docker host. 
+      It’s short for –publish.
+
+Q) ECR and ECS
+Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes easy to store, manage, deploy Docker container images. 
+Amazon ECR is integrated with Amazon Elastic Container Service (ECS), simplifying your development to production workflow
+   
+   will go to ECR and will create a repository, will have commands to push & pull docker container images to the repository
+    
+   Q) How did you registor a regestory in ECR 
+   
+   Q)
+       
+   
+Q) what is the defference between registory and repository
+  registory is a type of software to store the repositors (ex:- ECR, JFROG), where as repository is a file system which conntains set of files
+	
+Q) what is defference b/w CMD & Entery point 
+  *CMD is default instruction which is exicuted when we run container out of image, cmd can be overreaded,
+   when we give multiple cmd it will consider only last cmd in docker file.
+  
+  *Enterypoint can not be overreaded during run time
+  
+ **CMD instruction can be overreaded during run time but entrypoint can not be overreaded during run time, entery point can be apened with the
+   argument given in the docker file
+    
+Q) what is docker compoise 
+   when we need to run multiple container at a time we will use docker compose, it is advanced version of docker file 
+
+Q) docker swarm
+Q) what is vertulzation and containerzation
+
+
+Q) what is the default values of fallowing
+    umask value for root user = 0022  (usermask)
+	umask value for ec2 user  = 0002 
+	base permissions for file = 0666
+	base permission for directory = 0777
+	
+	default directory permissions for root = 755  
+	default file permission for root = 644
+	
+	defult directory permission for ec2 user = 775
+	default file permission for ec2 user     = 664
+	
+   *values of read = 4 wright = 2   exgute = 1  "rwx"
+	
+   *three sets will be there "owner group exicuted" as shown as "dr- xr- x---" respectivly
+
+   *if you want to fimd existing permissions of any file use command "ls -l"
+	
+	dr-xr-x---    1 haris    UsersGrp         0 Jul 13  2021 01
+    dr-xr-x---    1 haris    UsersGrp         0 Jul 15  2021 02
+    dr-xr-x---    1 haris    UsersGrp         0 Dec  2 23:04 02-12-21
+    dr-xr-x---    1 haris    UsersGrp         0 Mar  8 07:39 03
+    dr-xr-x---    1 haris    UsersGrp         0 Jul 15  2021 15-07-21
+	
+	*how to find umask value 
+	  cmd "umask"
+    *how to change umask value 
+	  cmd "umask 022"
+	*how to change umask value permanently spacific user
+	 need add umask value to .bash_profile
+	*how to change umask value permanently for all user 
+	 need add umask value to etc/profile file 
+	 
+	 note:- default values are depends upon umask value 
+	 
+	 * if u want to create directory with required permissions
+	  cmd "mkdir -m 700 directory name "  (-m = more, -p = parent, -v = verbus"
+	  
+	*how to change chmod permissions even for sub directorys 
+	 chmod -R 666 directory name 
+    
+	*how to change ownersheep for file or directory
+	chown username filename/directory name 
+   
+    *how to change group name for file/directory
+	chgrp newgroupname file/directoryname
+	
+	*how to change owner and group names at a time
+	chown newuser:newgroupname file/directory
+	
+	Mostly issues come at the time of build creation 
+1- unable to clone code from SCM
+2- cloning takes a lot time
+3- Server runs out of space 
+4- unable to copy data to destination server
+5- ssh connection times out etc.
+
+  Q) if acording to organiztion police if SSH conectivity is not allowd to connect ansible server and other nodes, what will you do
+     Ans) will use other tools which not required shh like chef and puppet 
+	                                or
+	   http and https connectivity is allowed between servers, for expample number of users as to be created and packages has to be updated 
+	   or users has to be blocked we need to change DNS settings we will allow configurations of the all the servers to be keept in the
+       centralised repositors this configuration will be called to all the servers using http and https  
+
+  Q) how do you scure your docker images, 
+  Q) what is docker registory, difference between public and private registory, in which cases will use public regitory and private registory (repository)  
+  Q) if you wright docker file, what are all the inputs you need from devloper and viseversa
+  Q) what is cgroup, namespaces and UFS 
+  Q) what is the loglevel, and where we can change the loglevel and where we use logleveal in defferent logleveal enveronment   
+  Q) how to create private subnet by default 
+   ans) genrally while creating vpc inernet gateway has been associtaed with main rout table but in this case we have to create route table 
+        and netgateway, this both has to be associtaed and this new route table need to be make it has main route table then if we create
+        subnet it will be private by default
+  Q) what are the automation tools you have worked with 
+       ansible and teraform 
+  Q) what are the defference between application load balancer and network ELB 
+     Application load balancer 
+	 if we need to load balance only hhtp and https trafic then i am going to use application load balancer because based on  that 
+	 we can implement multipale rules like based on path, host, multipale defferent parametters based on sourse and multipale rules 
+	 placed on application. in application load balancer we have target groups 
+	 
+	 Network load balancer
+	 if we want to balance load based on TCP, UDP & TLS  then we have to use network load balancer.
+	 in network load balancer we can not place security group as well as multiplae rules like application load balancer 
+  Q) what is role in ansible
+  
+  Q) To access kernel information about process
+  Q) which Command compares 2 specified branches in git
+  Q) how to change master branch in git 
+        or 
+     how to point master branch to new branch in git 
+     ans)  
+	 1 ) Renamed master branch to oldmaster.
+
+          [shell]git branch -m master oldmaster[/shell]
+
+
+          Now there is no master branch on my local machine.
+
+     2) Renamed my masterTemp branch to master
+
+          [shell]git branch -m masterTemp master[/shell]
+
+           The branch which was named masterTemp on my local machine is now master
+
+     3) Delete the branch from remote
+
+          [shell]git branch -rD master[/shell]
+
+     4) Push the new master branch to remote
+
+          [shell]git push –force origin master[/shell]
+		  
+	Q) which protocal that ping use ?  
+	ans) ICMP (Internet control message protocal)
+	
+	Q) what is softlink and hardlink 
+	
+	  *softlink is nothing but crating a shortcut to a file, this shortcut file will have different inode number and file size is small 
+	   when compared to original file, if original file deleted the short link will become useless. however softlink dont store the content 
+	   of original file it just store the location of the original file 
+	     "ln -s original_filename softlink_filename"
+	   
+	  *hardlink is creating a copy of file with defferent name, this hardlink file will have same inode number and file size as original
+       if original file or hardlink file content has modefied it is going to change in other file also, if original has deleted hardlink 
+       file will not be deleted.  
+          	   "ln original_filename hardlink_filename"
+	   
+	  *what is inode
+	   Every file in the system will have index node called inode, inode contains the information of a file like inode number, file size,
+	   owner information, permission, file type, number of links etc and inode number will not contain file name and file content.   
+	     "ls -li" it will show inode number 
+
+        	

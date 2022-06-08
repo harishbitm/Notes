@@ -1,0 +1,10 @@
+01.sudo wget link-addres
+02.sudo tar -xvf tomcat.az 
+03.sudo vi /opt/Tomcat-08/webapps/manager/META-INF/context.xml   :- replace (127.0.0.0.0) by (.*) 
+04.add script in tomcat-users.xml file  (path:- /opt/Tomcat-08/conf)
+  <tomcat-users>
+   <role rolename="manager-gui"/>
+   <user username="admin" password="Admin" roles="manager-gui, manager-script, manager-admin, manager-status"/>
+   </tomcat-users>
+05.change port number of tomact in /opt/conf/server.xml and asign the same port number in secirity group in server
+06. sh startup.sh     :-Start tomcat by /opt/tomcat/bin/startup.sh 

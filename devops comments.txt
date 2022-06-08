@@ -1,0 +1,190 @@
+
+harishbitm@gmail.com
+harishkeerthe1234
+Harish@1234 :- AWS pasword
+
+server         --- 107.22.147.18
+server name    --- ubuntu
+server command ---ssh -i "harishkeypair.pem" ubuntu@ec2-107-22-147-18.compute-1.amazonaws.com
+
+1-ls (listing files and directory)
+2-git add filename (git add. , git add *) 
+3-git status
+4-git commit -m "message 01" 
+5-git remote add origin URL
+6-git push -u origin
+
+To add user name :- git config --globle user.email "@gmail.com"
+To remove user name :- git config --global --unset user.name
+To remove URL :- git remote rm origin 
+To creat file :- touch file name
+
+  *** proceger ***
+01-ls
+02-git inti
+03-git add file name 
+04-git status
+05-git commit -m "hello"
+06-git remote add origin url
+07-git push -u origin 
+
+01- git reset --soft         :- to get back data from repocetory to stageing area  
+02- git reset head file name :- To get back data from stageing area to working area
+03- git reset --mixed cid
+ 
+  ***To view data in repocetery***
+git log --oneline 10
+git log --auther=name 
+git log --since=yy-mm-dd --untill=yy-mm-dd
+
+  *** STASH ***
+01.git stash save " message "
+02.git stash list     -- it will show message 
+03.git stash show ID  -- to show file name
+04.git stash apply    -- it will get latest file from stash memory to staging memory 
+05.git stash apply ID -- to get perticular file
+06.git stash pop      -- to cut file in stash memory and past in staging area
+07.git stash drop     -- TO delet file in stash memory
+08.git stash drop ID  -- to delete perticual file in stash memory 
+
+  ***BRANCH ***
+01.git branch NAME          ---To creat branch 
+02.git branch checkout NAME ---To enter into branch
+03.git merge branch name   --- to merge branch data
+04.git branch -r            --remote branch
+05.git checkout -b master1  -- to creat branch and enter into branch 
+06.git branch -d master     -- delete
+
+
+  *** Edeting file in linux ***
+cd folder name      --To enetr into subfolder 
+cd ..               --To come back to main folder
+touch file name     --To creat file
+vi file name        --to edit data in file --> I  --> ESC --> :WQ (SAVE DATA & EXIT) OR :Q! (WITHOUT SAVE & EXIT ) (
+                      vi /nano/ vim = editor) or  :q! (if it is read only then comeout with out saving)
+cat file name          --to view data in linux tab
+git tag name commit ID -- to create tag
+git tag                -- to list tags
+git push origin tag name  -- to push tags into repository
+
+
+             ****linux*****
+01.mkdir folder name  --To creat directry (folder)
+02.df -h              ---To find space avilable
+03.pwd                 -- To find path(present working directory)
+04.ls -l      ---To find longlist
+05.ls -la     ---To find hidenfiles
+06.ls -lt     ---long list withtime
+07.ls -ltr    --- long list withtime reverse
+08.history    --- To find comments excuted previusly
+09.rm filename   --- To delete file
+10.rm -rf directory name ---To delete directory (rf-recarcivly and forcefully)
+11.cd /      ----It will show configurations file 
+12.sudo su  --- To switch to root user
+13.exit    --- To come bake to normal user
+14.sudo touch filename ---  To creat file in opt folder
+15.sudo vi filename   ---  To edit file (after editing file press ESC and :wq to exit from file by saving data)
+Note :- To creat files rather then home folder 1. we need to switch to root user, comment to switch to root user " sudo su ". 
+                                               2. sudo touch filename or mkdir directory name  
+15.sudo wget link   --- To download pakages (wget-it download pakages present in web to server)tar file need to dwonload for linux
+               (aws-03 video)
+16.SUDO CP SOURCE DESTINATION ---- (SUDO CP /OPT/CODE/HOME) copy files
+17.SUDO MV SOURCE DESTINATION  ---(SUDO MV /OPT/DEVOPS/HOME) move files
+18.sudo mv oldname newname    --- rename file
+19.sudo tar -xvf tarfilename   ----- To extract file like zip file 
+
+     How to add NEW USER  
+20.sudo adduser name           ---- To add user, it will ask pasword it will unvisable
+     A-Go to etc/ssh/sudo vi sshd-config
+     B-change pasword athantication -NO to YES
+     C-save file then exit
+     D-sudo service ssh restart 
+   now user cant creat files in opt and other directorys to creat files need to chanege sudo settings 
+    A-sudo visudo
+    B-add username ALL=(ALL:ALL)ALL comment in user privilage specification list
+    C-CTR x --- SHIFT-Y ----ENTER
+
+    How to chenge Hostname 
+    A- go to etc directory --- sudo vi hostname  (open hostname file)
+    B- change IP addres to name 
+    c- go to AWS SERVER -INSTANT STATE -REBOOT
+       OR sudo reboot
+21.top  (to know CPU memory)
+   downloading of folder strutcher
+     1-Build process
+22.sudo apt-get update
+22.sudo apt-get install default-jdk
+    java -version
+23.sudo apt-get install maven
+     mvn -version
+24. cat /etc/ubuntu os-relese ---->to find ubuntu version
+25.sudo update-alternative--confeg java---->to switch java version
+26.sudo git clone URL  ----->To upload data into server from github
+27.sudo mvn clean install ----> it shoud be in pom.xml file
+28.mvn archetype:generate  ----> To download maven folder strucher
+
+ Tomcat
+29.sudo wget tomcatlink
+30.sudo tar -xvf taomcatname---->To untar file
+31.go to bin and do ls ---> sh startup.sh (startup.sh) --->to start tomcat
+  *scurity group settings need to do in server to run tomcat application --->security-->inbond ---->add rule
+  *For tomcat we need to change port number in server by server.xml file 8080--->5050
+
+   error ---> 403 (network acces )
+   make a changes in context.xml file ---> remove 127.000000
+   error----->401 (manger app)
+   add script in tomcat-users.xml file
+   <tomcat-users>
+   <role rolename="manager-gui"/>
+   <user username="admin" password="Admin" roles="manager-gui, manager-script, manager-admin, manager-status"/>
+   </tomcat-users>
+ 
+ 
+   install any war file in tomcat webaaps directory (for testing perpose)
+   sudo wget https://get.jenkins.io/war-stable/2.289.3/jenkins.war
+ 
+   ****jenkins****
+
+   JENKINS CI-CD tool version 2.289
+
+   **How-to-install-jenkins-on-ubuntu-18-04(from web)
+   step-1
+   1-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+   2-sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+   3-sudo apt update
+   4-sudo apt update
+   5-sudo apt install jenkins
+  *commeands in jenkins*
+  1-sudo service jenkins status
+  2-sudo service jenkins stop
+  3-sudo service jenkins start
+  4-sudo serbice jenkins restart
+  step-2
+  1-Go to website place IP-addres and port number  and search (IP-addres:8080)
+   this site cont be reached ERROR will appear
+   Make changes in server-->security--Edit inbond rules--Add rule 
+  2-Website will ask password and it will show path of password in server 
+  /var/lib/jenkins/secrets/initialAdminPassword ---> copy that password past in website
+  3-If u want to cheange port number of jenkins 
+    *cd etc/default/--- jenkins file will be this path
+    *sudo vi jenkins ----- edit port number inside 
+    *sudo service jenkins restart --- if ur changing port number inside file u need to change in security group-- inbound rules also
+ 
+ * top--- to find CPU load 
+
+32.sudo find / -name "findname"  
+
+33. Build triger methods 
+    --Build periodicaly 
+   crontab----build job time settings, crontab guru
+    * * * * *
+   * Minute
+   * Hour
+   * Day of month
+   * Month
+   * Day of week
+  .hook method  :- url/github-webhook
+   Q/A 
+   1- how to move data from two folders to one repository 
+   2- how to push tags to central
+

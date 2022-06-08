@@ -1,0 +1,5 @@
+01- github Adding data into repository
+02- github chaning directory, copping data from one repository to another repository, clone, changing origin 
+03- Slash, Branch 
+04- conflict error, tags, reset.(16min)
+05-20min defnation git -github-svm and pull-fetch-clone, 

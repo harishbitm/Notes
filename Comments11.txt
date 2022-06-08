@@ -1,0 +1,317 @@
+
+harishbitm@gmail.com
+harishkeerthe1234 
+Harish@1234 :- AWS pasword
+
+harishbitm@gmail.com  :- github
+Harish@341
+
+harishbitm@outlook.com
+2552489Hk@
+
+harishbitm          :- docker
+Harish@1234
+
+server         --- 107.22.147.18
+server name    --- ubuntu
+server command ---ssh -i "harishkeypair.pem" ubuntu@ec2-107-22-147-18.compute-1.amazonaws.com
+
+      GIT 
+	  
+	git tutorials https://youtu.be/vMdSqMf6BPY   
+
+1-ls (listing files and directory) 
+2-git add filename (git add. , git add *) 
+3-git status
+4-git commit -m "message 01" 
+5-git remote add origin URL
+6-git push -u origin master
+      (-u option allows us to set upstream of the branch we are pushing so that it will create a link between local branch to a branch in 
+        a github, after creating a link for next push you can use command "git push" )
+		
+      https://youtu.be/csHeaYWspic
+
+* ls :- listing both file & directory 
+* find . -maxdepth 1 -type f :- To list only files 
+  find . -type f (f-files, d-directory)
+
+
+To add user name :- git config --globle user.email "@gmail.com"
+To add user name :- git config --globle user.name "Harish"
+To remove user name :- git config --global --unset user.name
+To remove URL :- git remote rm origin 
+To creat file :- touch file name
+
+  *** proceger ***
+01-ls
+02-git inti
+03-git add file name 
+04-git status
+05-git commit -m "hello"
+06-git remote add origin url
+07-git push -u origin master
+
+how to remove old URL 
+git remote rm origin 
+
+* git clone url :- to download code
+
+how to give access to the user for preticular repository
+ settings --- manage access ---- invate a colabarater
+
+how to change public to private 
+settings --- visability of rpositorys 
+
+**diff b/w reset and revert commands
+     
+	rest =    "git rest --hard head~1" (head~1 or commit_id)
+    revert =  "git revert commit_id"
+	
+    reset will undo the changes in the file and it will remove the commits
+    revert will undo the chnages in the file but it will not delete the commit_id, it will create a new commit_id
+
+    where to use reset and revert 
+	rest is used when comments are in local 
+    rest is used when we want to undo the changes of file which is not pushed into the central repository (present in local repository)
+    revert is used when we want undo the changes of file which is in central repository 
+
+01- git reset --soft         :- to get back data from repocetory to stageing area  
+02- git reset head file name :- To get back data from stageing area to working area
+03- git reset --mixed cid
+
+01. git revert <commit_hash>
+
+    https://stackoverflow.com/questions/22682870/how-can-i-undo-pushed-commits-using-git
+
+git pull origin master --allow-unrelated-histories   :- if u want to pull  data from deferent repository 
+ 
+  ***To view data in repocetery***
+git log --oneline 10
+git log --auther=name 
+git log --since=yy-mm-dd --untill=yy-mm-dd
+
+  *** STASH ***
+  Stash is a temprovary memory which is used to store the data which is present in the stageing area  
+01.git stash save " message "
+02.git stash list     -- it will show message 
+03.git stash show ID  -- to show file name
+04.git stash apply    -- it will get latest file from stash memory to staging memory 
+05.git stash apply stash@{2}  -- to get perticular file
+06.git stash pop      -- to cut file in stash memory and past in staging area
+07.git stash drop     -- TO delete file in stash memory
+08.git stash drop ID  -- to delete perticual file in stash memory 
+
+  ***BRANCH ***
+01.git branch NAME          ---To creat branch 
+   git branch               ---it will list all branch 
+02.git checkout NAME ---To enter into branch  
+03.git merge branch.name    --- to merge branch data ( )
+04.git branch -r            --remote branch
+05.git checkout -b master1  -- to creat branch and enter into branch 
+06.git branch -d master     -- delete
+07.git diff 2nd-branchname  -- it will show the code defference between existing branch and perticular branch
+
+ git tag          :-to view all tags 
+
+     PROCEDURE FOR BRANCHING 
+	 1.create new branch
+	 2.switch to new branch
+	 3.make changes
+	 4.commit changes
+	 5.merge main branch to the current branch
+	 6.fix if there are any conflicts
+	 7.push the changes
+	 8.create pull request
+	 
+ --> if we want to undo any last changes in saved file use bellow command 
+      " git checkout filename " 
+
+
+  *** Edeting file in linux ***
+cd folder name      --To enetr into subfolder 
+cd ..               --To come back to main folder
+touch file name     --To creat file
+vi file name        --to edit data in file --> I  --> ESC --> :WQ (SAVE DATA & EXIT) OR :Q! (WITHOUT SAVE & EXIT ) (
+                      vi /nano/ vim = editor) or  :q! (if it is read only then comeout with out saving)
+cat file name          --to view data in linux tab
+git tag name commit ID -- to create tag
+git tag                -- to list tags
+git push origin tag name  -- to push tags into repository
+
+diff b/w git clone & pull & fetch 
+
+git clone :- it is used to download entair repository
+git fetch :- it will dowmload latest modifed file from central repository and store that data into the remote origin master not into the local repository   
+git pull  :- it is used to get perticularly latest modified file from the central repository to local repository(fetch + merge)
+git merge :- it is used to merge remote origin master data into the local repository
+
+
+             ****linux*****
+01.mkdir folder name  --To creat directry (folder)
+02.df -h              ---To find space avilable
+03.pwd                 -- To find path(present working directory)
+04.ls -l      ---To find longlist of directory
+05.ls -la     ---To find hidenfiles of directory
+06.ls -lt     ---long list withtime
+07.ls -ltr    --- long list withtime reverse
+08.history    --- To find comments excuted previusly
+09.rm filename   --- To delete file
+10.rm -rf directory name ---To delete directory (rf-recarcivly and forcefully)
+11.cd /      ----It will show configurations file 
+12.sudo su  --- To switch to root user
+13.exit    --- To come bake to normal user
+14.sudo touch filename ---  To creat file in opt folder
+15.sudo vi filename   ---  To edit file (after editing file press ESC and :wq to exit from file by saving data)
+Note :- To creat files rather then home folder 1. we need to switch to root user, comment to switch to root user " sudo su ". 
+                                               2. sudo touch filename or mkdir directory name
+16.sudo chown -R ec2user:ec2user tomcat8   :- to change ownership of amy file											   
+											   
+15.sudo wget link   --- To download pakages (wget-it download pakages present in web to server)tar file need to dwonload for linux
+               (Linux-04 video)
+16.SUDO CP SOURCE DESTINATION ----   (SUDO CP /OPT/CODE/HOME) copy files
+17.SUDO MV SOURCE DESTINATION  ---   (SUDO MV /OPT/DEVOPS/HOME) move files
+18.sudo mv oldname newname    ---    rename file
+19.sudo tar -xvf tarfilename   ----- To extract file like zip file 
+    ifconfig :- local ip addres
+	
+	tree = it will least all the files
+	ifconfig = to know server details like ip address
+
+     How to add NEW USER  (Linux-04)
+20.sudo adduser name           ---- To add user, it will ask pasword it will unvisable
+     A-Go to etc/ssh/sudo vi sshd-config
+     B-change pasword athantication -NO to YES
+     C-save file then exit
+     D-sudo service ssh restart (**Don't forget to do**) (permission-01)
+   now user cant creat files in opt and other directorys to creat files need to chanege sudo settings 
+    A-sudo visudo
+    B-add username ALL=(ALL:ALL)ALL comment in user privilage specification list (permission-02)
+    C-CTR x --- SHIFT-Y ----ENTER
+	* To find list of users in server  (Linux-05)
+	   cat /etc/passwd   
+    * To switch one user to another user 
+	  su username
+	*To reset user password 
+	  sudo passwd username
+	  
+	*some times sudo will not work due to sudours file corroption then fallow bellow link
+	  https://aws.amazon.com/premiumsupport/knowledge-center/ec2-sudoers-syntax-errors-sudo/
+	  
+	 *To replace any word in text file 
+	  :%s/oldword/newword/g 
+	  
+  How to switch from one server to another server internaly 
+       *ssh username@ip-address
+	   *exit :- To exit from that server 
+	
+  How To copy data from one server to another server
+         sudo scp source username@IPaddres:destination-path   :- to copy file 
+		 sudo scp -r source username@IPaddres:destination-path   :- to copy directory
+ 	ex:- sudo scp opt/file-1 harish@34.239.107.139:/opt/harish/
+	     *in destination server we dont have permission so we need to provide permission for directory by using bellow command (permission-03)
+		  To provide full permission to directory 
+		  sudo chmod 777 directoryname
+		  
+	 *passwordgenrator.net :- website used to creat passwords  
+  How to chenge Hostname 
+    A- go to etc directory --- sudo vi hostname  (open hostname file)
+    B- change IP addres to name 
+    c- go to AWS SERVER -INSTANT STATE -REBOOT
+       OR sudo reboot  :- to restart server from linux
+	   
+21.top  (to know CPU memory)
+   downloading of folder strutcher
+     1-Build process
+    *ps -ef to know process which are runing in the backend 
+	*search and replace command 
+	 enter into the file then :- ::s/presend word/new word/g
+	
+22.sudo apt-get update
+22.sudo apt-get install default-jdk  or sudo apt-get install openjdk-8-jdk
+    java -version
+23.sudo apt-get install maven
+     mvn -version
+   sudo apt-get remove maven
+   sudo apt-get purge maven
+24. cat /etc/ubuntu os-relese ---->to find ubuntu version
+25.sudo update-alternative --confeg java---->to switch java version
+26.sudo git clone URL  ----->To upload data into server from github
+27.mvn archetype:generate  ----> To download maven folder strucher
+28.sudo mvn clean install ----> it shoud be in pom.xml file (Project Object Model)
+29. cat etc/*-release ----> find details of server 
+
+topics 
+
+* usermanagement
+* Disk management
+* file permission
+* operating system analsis
+* logs management and package management
+
+
+
+   1.install java
+   2.install maven 
+   3.install git 
+   4.creat directory in opt 
+   5.clone data from github
+   6.sudo mvn clean install, where pom.xml file is present 
+   7. 
+   
+note:- apt-get will only work on ubuntu, Debian, mint, kali linux servers
+       apt-get will not work on centos, RHEL, Fedora, mach, Arch servers
+	   
+	   to find wether apt is instlled or not CMD locate apt-get 
+	   
+	   if not installed, intsall dben package and dpkg
+   
+   
+   
+Q) where will be the local repository in system and server 
+  localdisk--user--.m2--repository
+  ls -la
+  .m2 
+  
+  how to connect to AWS server using putty
+  
+  to connect thoru putty u need ppk.file
+  pem.file can be converded to ppk.file by puty.gen shoftware 
+
+   ****Tomcat***
+29.sudo wget tomcatlink
+30.sudo tar -xvf taomcatname---->To untar file
+31.go to bin and do ls ---> sh startup.sh (startup.sh) --->to start tomcat
+  *scurity group settings need to do in server to run tomcat application --->security-->inbond ---->add rule
+  *For tomcat we need to change port number in server by server.xml file 8080--->5050
+   once you change the port number its very importent to shutdown and startup.sh the tomcat
+
+   error ---> 403 (network acces error )
+   make a changes in context.xml file ---> replace by 127.000000 ---> .* (path:- /opt/Tomcat-08/webapps/manager/META-INF)
+   error----->401-acces_denied & 401-unathorised (manger app)
+   add script in tomcat-users.xml file  (path:- /opt/Tomcat-08/conf)
+   
+   <tomcat-users>
+   <role rolename="manager-gui"/>
+   <user username="admin" password="Admin" roles="manager-gui, manager-script, manager-admin, manager-status"/>
+   </tomcat-users>
+   
+   install any war file in tomcat webaaps directory (for testing perpose)
+   sudo wget https://get.jenkins.io/war-stable/2.289.3/jenkins.war
+   
+   *how to serch file name 
+     find / -name filename
+ 
+   1-one server  to other server
+ssh user name @destinaton    
+	 
+2-401 and 403 error
+3-how do you login into without keypeir
+4-what is ci cd explain
+5-what is deference between pull and fetch
+6-what are the defferent tools your using
+   
+   
+   Q/A 
+   1- how to move data from two folders to one repository 
+   2- how to push tags to central
+

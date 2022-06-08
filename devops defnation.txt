@@ -1,0 +1,60 @@
+DEVOPS
+Devops is not a Tool.Devops Is a Practice, Methodology, Culture or process used in an Organization or Company for fast collaboration,
+integration and communication between Development and Operational Teams. 
+In order to increase, automate the speed of productivity and delivery with reliability.
+
+STASH 
+Stash is a temprovary memory which is used to store the data which is present in the stageing area
+
+conflict error
+when we try to merge a file which is edited by two braches then conflict error accour 
+
+SVN and GITHUB
+ *repositors are called centralised repository             *distributrd centrakised repositors
+ *traking is dificult                                      *logs can be tracked esayly 
+ *required continues internet acces                        *not required 
+
+
+github is a centralised reposatory used to store data
+git is shoftware used to push data 
+
+Mavan :- it is a build tool and project managment tool
+http://mithuntechnologies.com/devops/DevOpsToolsMithunTechnologies.html  :- MITHUN requred tools 
+
+Q)what is permission for file and direcotry
+Ans:- 644 755
+
+Q2)How many enveronment will be there 
+   3 1.TEST--  2.UAT/PRE-PROD   3. PRODUCTION
+Q3)what is POM.xml
+   project object model, it will have all dtails of application error and server details
+Q4)where will be lical repository
+    C:\Users\haris\.m2\repository
+Q4)how many types of repositorys avilable mavan
+    1.cental --->updated data related to maven we will get from cental
+    2.remote
+    3.local --->data in the central repocitry will be stored in the local repocetory for 1st time 
+Q5)Tomcat version 8, it is web app depolyment server, it is used to up WAR file
+Q6)poc ---> proof of concept
+q7) list out mavne goles
+
+ssh port number-22
+windos port    -3389
+mysql port     -3306
+tomcat         -8080
+jenkins        -8080
+apachi/nginx   -80
+
+Q8}How do u change the port number of tomcat
+to sart and stop tomcat go to bin path 
+to change server related go to change server.xml 
+
+*****jenkins****
+
+*Jenkins is a CI-CD tool
+ CI-Continus intigration CD-continus delvary
+ we dont have Continus deployment because we should do pre-check before going to deployment
+*jenkins is a plugin based tool 
+*installations adn configaration are very esay in jenkins 
+*It is free and open source 
+*jenkins is devaloped by java based language 

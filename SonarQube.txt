@@ -1,0 +1,6 @@
+sonarQube is static code analysis tool
+   
+   it act as a quality managment tool
+       -code analysis
+	   -tets reports
+	   -code coverage reports

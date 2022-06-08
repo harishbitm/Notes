@@ -1,0 +1,236 @@
+****jenkins****
+
+   JENKINS CI-CD tool version 2.289
+
+   **How-to-install-jenkins-on-ubuntu-18-04(from web)
+   step-1
+    install java 8 :- before installing is mandiyatory   (sudo apt-get install openjdk-8-jdk)
+   1-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+   2-sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+   3-sudo apt update
+   4-sudo apt update
+   5-sudo apt install jenkins
+   6-sudo systemctl start jenkins
+   
+  *commands in jenkins*
+  1-sudo service jenkins status
+  2-sudo service jenkins stop
+  3-sudo service jenkins start
+  4-sudo service jenkins restart
+  step-2
+  1-Go to website place IP-addres and port number  and search (IP-addres:8080)
+   this site cant be reached ERROR will appear
+   Make changes in server-->security--Edit inbond rules--Add rule 
+  2-Website will ask password and it will show path of password in server 
+  /var/lib/jenkins/secrets/initialAdminPassword ---> copy that password past in website 
+  3-If u want to cheange port number of jenkins 
+    *cd etc/default/--- jenkins file will be this path
+    *sudo vi jenkins ----- edit port number inside 
+    *sudo service jenkins restart --- if ur changing port number inside file u need to change in security group-- inbound rules also
+ 
+ * top--- to find CPU load 
+  1.freestyle jobs and pipeline jobs
+  
+ ** Required to give cradentials if the repository is privat
+ 
+ error:- no ott present noasl password 
+         go to sudo visudo ----> jenkins ALL=(ALL:ALL) NOPASSWD: ALL 
+32.sudo find / -name "findname"  
+
+33. Build triger methods 
+
+   1)---POLL SVM---  (prefered method)
+     it will triger next mintue when there is changes in github repository
+   2)---Build periodicaly---
+     it will triger at perticular time what we set
+   crontab----build job time settings, crontab guru
+    * * * * *
+    * Minute
+    * Hour
+    * Day of month
+    * Month
+    * Day of week
+   3)---Hook triger---
+     it will triger next second when there is a change in github repository
+	 need to do settings in github 
+	 settings-->webhook-->addhook
+	 give url/github-webhook/
+	 content type --->json formet
+   4)---Build triger remotely----
+   5)---Build after other projects are built---
+        upstream-downstream
+ 
+  ***plugin***
+    1) view plugin--a)list view b)nested view
+	   need to downloda nested view plugin :- manage jenkins --> manage plugin
+	   b)nesteed view :- sub list view 
+    2)	a)restart :- URL/RESTART   b) safe restart :- download pligin-- it will restart jenkins after compliting all builds
+	3) Dicard old plugins :- go perticular job config there will be a option 
+	4) Add time stamps to the console output :- go perticular job config there will be a option in build enveronment 
+	5) Delete workspace before build start
+	6) Abort the build if it stucks  
+	7) Excute shell
+	8) build executor status  :- manaje jenkins 
+	9) Global tool configaration:- if u want to build with diffrent version without installing that version 
+	                              manage jenkins
+   10) restrict where this build can run :- configur
+   11) Disk usage :- manaje jenkins
+   12) Matrics disk usage :- manage jenkins 
+   13) Thin back-up:- manaje jenkins :- need to mention were the back-up data need to be stored and mention periodicaly
+   14) Notification  :- perticular job -- configur
+   
+   15)Role-based Authorization Strategy :- we can give permission to the user to manage required projects and also to manage jenkins 
+       we need to download plugin and need to restart jenkins 
+	   manage jenkins ---- configure globle security ----check role based strategy (authoriztion tab)--- now you will find new option in manage jenkins called "manage and asign roles"
+   
+   pipeline 1.build pipeline plugins
+            2.groovy
+            A.scripting
+			  node{
+			   stage{
+			     }
+				 }
+			B.Declarative pipeline 
+               in declarative pipeline we use bellow script 
+			     pipeline {
+				  agent any
+				  stage{
+				 } 
+				 KPAE1106011
+				 
+				 Defference between declarative pipeline and scripted pipeline
+ Declarative pipelines break down stages into individual stages that can contain multiple steps. 
+ Scripted pipelines use Groovy code and references to the Jenkins pipeline DSL(Domine spacific language) within the stage elements without
+ the need for steps.
+ 
+ Groovy script
+ https://www.youtube.com/watch?v=RvY5b--wnE0   :- Groovy script
+ https://www.youtube.com/watch?v=yl3a4jnf0jA :- futures of Groovy script 
+ 
+ options :- 1. in between jobs can be skipd 
+            2. if inbetween job is failed, we can re-build from that job after rectifying error
+			3. Load can be distributed into agent servers by runing defferent stages in defferent servers
+				 
+  master & slave
+  lanch 2 server :- 1 for master and 1 for slave
+   in master server need to install jenkins   
+  add nodes
+  in jenkins tab---manage jenkins---manage nodes and cloud --- new node
+  name:-
+  click on permanent agent
+  name 
+  remote root directory :-need to mention the path where you want to store the data in destination server
+  label :- tag   
+  launch methdos :-  lanch agent via ssh method
+  hostname :- destination server ip-address
+  cradentials :- add ---> 
+  kind --- username with keypair
+  id :- givename 
+  username :- ubuntu 
+  privatekey :- copy keypair and past in tab
+  hostkey verfication statage :- non varifying varification statage 
+  
+  * java need to installed in destination server (slave)
+  need to give permisions to directory in destination server :- sudo chmode 777 directoryname 
+  need to spacify in which server output to be build :- in jenkins tab go to configur & in general u can find "restrict where the build to be done "
+  option give lable name which have been given before 
+  need to install maven in destinatio server and use clean install in jenkins configar tab "or"
+  if you dont want to install any package and need to build by using jenkins then ---manage jenkins---> Global tool configuration ---->maven spacify version 
+  
+  check in destination server wether data has been cloned from git-hub 
+  
+  if u want to build the code go to jenkins tab ---> invoke top level maven targets--->clean install 
+  
+Q) how many will be the defult executors for master and node
+ans:-  2 and 1 
+Q) After building in jenkins, where the output will be stored 
+ans:- /var/lib/jenkins/workspace
+Q) how master and slave conscept works 
+ans :- master will generate master.jar file & that file will be stored in destination server so that the connection will be establised 
+
+.hook method  :- url/github-webhook
+
+
+shall script
+ --> Need to wright a script to clear buffer and cache
+     in opt directory create a file (name=clearcache)-- wright script in that file--- start that file(sh clearcache)
+     if you want to clear buffer & cache automatic then set a cronttab      	 
+     cronttab -e ---> * * * * * /opt/clearcache.sh
+	 free -h :- to know buffer & cache in server
+
+ ---> Backup
+ 
+ 
+ ---> shall script 
+      compile---> unit test----> code analasis ---> assemble---> deploy 
+	  
+	  tow types scripting language 
+	  1:- DSL(declarative scripting) 2.Scripting 
+ 
+
+
+Topic:- configurating system environment
+
+ go to  jenkins consoul--->  manage jenkins ----> configur system ---> there you will find home directory path (var/lib/jenkins) path can be modifed if needed
+	 jenkins store all the data in this directory
+	 in that directory all configurations files, plugins and other files will be stored
+	 
+Topic:- JENKINS CLI
+
+---->by using this option you can oprate jobs by command line interface (CLI)
+
+jenkins console----> manage jenkins--->jenkins CLI----> there you can find number of commends how you can oprate jenkins by CLI
+
+Build job by CLI 
+1.download jenkins-cli.jar file in server 
+2.java -jar jenkins-cli.jar -s http://34.229.227.21:8080/ -webSocket build Firstjob (this command can find in jenkins CLI console)
+3.and also permisions need to give ---> manage jenkins-->Configure Global Security----> check Any one can do anything in Authorizarion tab
+4. java -jar jenkins-cli.jar -s http://34.229.227.21:8080/ -webSocket build Firstjob -v -s  :-Prints out the console output of the build in terminal.
+
+Topic :- multi branch pipeline projects
+         https://www.youtube.com/watch?v=fo36b23cpIU  :- 
+		 
+		 The Multibranch Pipeline project type enables you to implement different Jenkinsfiles for different branches
+		 of the same project. In a Multibranch Pipeline project, Jenkins automatically discovers,
+		 manages and executes Pipelines for branches which contain a Jenkinsfile in source control.
+		 
+		 it is going to create a pipeline for each branch in repository(SCM) where it finds a jenkins file
+		 
+		 Example :- if we have 4 branches, in that 4 branches we have jenkins file in 3 branches then jenkins is going to 
+		            create pipeline for that 3 branches 
+					
+	    
+		
+		
+		webhook :- 
+		           if we anable webhook, if any changes accured inside branch or if any new branch has been created in scm
+				   atomaticaly it is going to create new pipeline 
+				   
+				   note :- it is going to build only a branch which has changes, other branches which dont have a changes are
+				           note going to build 
+	
+
+     intigrate jenkins with bitbucket 
+
+     https://medium.com/ampersand-academy/create-simple-devops-project-f445a752880d
+
+
+	 
+   https://medium.com/ampersand-academy/create-simple-devops-project-f445a752880d
+Q & A
+https://www.youtube.com/watch?v=woMAXn4e8NA
+
+
+
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 

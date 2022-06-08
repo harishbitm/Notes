@@ -1,0 +1,58 @@
+Mysql version :-5.7 or 8
+cat etc/os-release 
+**how to install mysql for ubuntu version**
+{ *sudo apt update                                                          
+  *sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb   :- mysql link 
+  *sudo dpkg -i mysql-apt-config_0.8.15-1_all.deb  :- below command is to install above downloaded apt repository
+  *sudo apt-get update
+  *sudo apt-get install mysql-server               :-it install and ask for password
+  *mysql_secure_installation                                                          }
+  *sudo apt-get remove --purge mysql-server mysql-client mysql-common -y :- to uninstall mysql from ubuntu
+
+**swith from app node to DB node
+   *mysql -u username -p 
+   *show databases;   :-
+   *CREAT DATABASE fundsetransfer;    :-
+      *CREAT DATABASE fundsetransfer1;
+      *CREAT DATABASE fundsetransfer ; 	:- to creat multipale database 
+   *DROP DATABASE name;                :- to delete
+   *use databasename                   :-it will enter into the database
+   *show tables                        :- 
+   
+**Backup**
+ mysql backup (dump)
+ *mysqldump -u username -p databasename > /opt/mysql.sql    :- backup (need to give all permission opt directory)
+ *mysqldump -u username -p databasename < /opt/mysql.sql    :- restore 
+ 
+***adding user****
+*mysql> CREATE USER 'fosstechnix'@'%' IDENTIFIED BY 'fosstechnix@123';
+*mysql> GRANT ALL PRIVILEGES ON * . * TO 'fosstechnix'@'%';
+*mysql> GRANT ALL PRIVILEGES ON * . * TO 'fosstechnix'@'%';
+
+  
+
+
+
+
+
+
+
+
+
+
+
+    1  sudo vi /etc/hostname
+    2  sudo reboot
+    4  cat etc/os-realease
+    6  cat etc os-release
+    7  cat /etc/os-release
+    9  sudo apt-get upadate
+   10  sudo apt-get update
+   11  wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb
+   12  sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
+   14  sudo apt-get update
+   15  sudo apt-cache policy mysql-server
+   16  sudo apt install -f mysql-community-client=5.7.35-1ubuntu18.04
+   18  mysql --version
+
+
