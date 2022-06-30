@@ -1,16 +1,4 @@
 
-github :- harishbitm, Harish@341
-
-harish.bollinani
-
-harishbitm@gmail.com
-harishkeerthe1234
-Harish@1234 :- AWS pasword
-
-server         --- 107.22.147.18
-server name    --- ubuntu
-server command ---ssh -i "harishkeypair.pem" ubuntu@ec2-107-22-147-18.compute-1.amazonaws.com
-
 1-ls (listing files and directory)
 2-git add filename (git add. , git add *) 
 3-git status
@@ -59,6 +47,13 @@ git log --since=yy-mm-dd --untill=yy-mm-dd
 05.git checkout -b master1  -- to creat branch and enter into branch 
 06.git branch -d master     -- delete
 
+github :- harishbitm, Harish@341
+
+harish.bollinani
+
+harishbitm@gmail.com
+harishkeerthe1234
+Harish@1234 :- AWS pasword
 
   *** Edeting file in linux ***
 cd folder name      --To enetr into subfolder 
